@@ -1,0 +1,10 @@
+%% Diagrama de arquitectura — TagTranscriptor (Next.js minimal)
+
+flowchart TB
+    Browser[Browser - upload audio] --> Page[Next.js Page]
+    Page --> ApiRoute[/api transcribe]
+    ApiRoute --> Whisper[Whisper / Groq STT]
+    ApiRoute --> Storage[Supabase Storage<br/>audio uploads]
+
+    classDef external fill:#fef3c7,stroke:#d97706
+    class Whisper,Storage external

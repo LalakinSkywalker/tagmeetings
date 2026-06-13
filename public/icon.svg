@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#ffffff"/>
+  <g transform="translate(256,256)">
+    <!-- Microphone body (naranja Bluntag) -->
+    <rect x="-40" y="-120" width="80" height="160" rx="40" fill="#ff8133"/>
+    <!-- Microphone arc -->
+    <path d="M-70,20 A70,70 0 0,0 70,20" fill="none" stroke="#ff8133" stroke-width="12" stroke-linecap="round"/>
+    <!-- Microphone stand -->
+    <line x1="0" y1="90" x2="0" y2="140" stroke="#ff8133" stroke-width="12" stroke-linecap="round"/>
+    <line x1="-40" y1="140" x2="40" y2="140" stroke="#ff8133" stroke-width="12" stroke-linecap="round"/>
+    <!-- Text lines (representing transcription) -->
+    <line x1="90" y1="-80" x2="180" y2="-80" stroke="#57534e" stroke-width="10" stroke-linecap="round"/>
+    <line x1="90" y1="-40" x2="160" y2="-40" stroke="#57534e" stroke-width="10" stroke-linecap="round"/>
+    <line x1="90" y1="0" x2="170" y2="0" stroke="#57534e" stroke-width="10" stroke-linecap="round"/>
+  </g>
+</svg>

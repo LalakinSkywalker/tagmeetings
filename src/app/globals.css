@@ -1,0 +1,145 @@
+@import "tailwindcss";
+
+/* Tailwind v4 dark mode con clase explicita (no @media).
+   El ThemeProvider de next-themes pone class="dark" en <html> cuando aplique. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* =============================================================================
+   SISTEMA DE DISEÑO — TagTranscriptor by Bluntag AI Studio
+   Identidad: minimalista premium. Naranja Bluntag (#ff8133) como UNICO acento
+   fuerte sobre una escala de grises calidos (stone). Tipografia Raleway.
+   Mobile-first, app-nativa (safe-areas iPhone, tap targets, transiciones).
+   ============================================================================= */
+
+@theme inline {
+  --font-sans: var(--font-raleway);
+  --font-mono: var(--font-geist-mono);
+
+  /* Marca Bluntag */
+  --color-brand: #ff8133;
+  --color-brand-strong: #ec6a1c; /* hover/pressed */
+  --color-brand-soft: #fff3ea; /* fondo suave naranja (light) */
+  --color-brand-softdark: #2a1a0e; /* fondo suave naranja (dark) */
+  --color-brand-ring: #ffb685; /* focus ring */
+
+  /* ---------------------------------------------------------------------------
+     Escala tipografica estilo app-nativa movil (iOS / Android).
+     Subimos el CUERPO +2px respecto al default de Tailwind: el texto de lectura
+     de los OS moviles es ~17-18px (no 16) — calibrado decadas para lectura
+     comoda y toque preciso en pantalla tactil. Los TITULOS (text-2xl / text-3xl)
+     se dejan en su tamano por defecto (el usuario pidio subir todo MENOS los
+     titulos). Cambiar la escala AQUI escala TODA la app desde un solo lugar
+     (apalancamiento) — no hay que tocar clase por clase en los 31 archivos.
+     --------------------------------------------------------------------------- */
+  --text-xs: 0.875rem; /* 12 -> 14 */
+  --text-xs--line-height: 1.125rem; /* 18 */
+  --text-sm: 1rem; /* 14 -> 16 */
+  --text-sm--line-height: 1.375rem; /* 22 */
+  --text-base: 1.125rem; /* 16 -> 18 (cuerpo, nivel iOS) */
+  --text-base--line-height: 1.625rem; /* 26 */
+  --text-lg: 1.25rem; /* 18 -> 20 */
+  --text-lg--line-height: 1.75rem; /* 28 */
+  --text-xl: 1.375rem; /* 20 -> 22 */
+  --text-xl--line-height: 1.875rem; /* 30 */
+  /* text-2xl / text-3xl NO se tocan: son los titulos. */
+}
+
+/* -----------------------------------------------------------------------------
+   Base
+   ----------------------------------------------------------------------------- */
+body {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  /* Evita el "rebote" de scroll que delata una web dentro de una app nativa */
+  overscroll-behavior-y: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Tap highlight nativo apagado (lo manejamos con estados propios) */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* -----------------------------------------------------------------------------
+   Safe-areas iPhone (notch + home indicator)
+   Uso: clases utilitarias para que el contenido respete los bordes del telefono
+   ----------------------------------------------------------------------------- */
+.pt-safe {
+  padding-top: env(safe-area-inset-top);
+}
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.pb-safe-nav {
+  /* Altura del tab bar + safe area inferior */
+  padding-bottom: calc(env(safe-area-inset-bottom) + 4.5rem);
+}
+.h-safe-top {
+  height: env(safe-area-inset-top);
+}
+
+/* -----------------------------------------------------------------------------
+   Transiciones nativas suaves (presion de botones tipo iOS)
+   ----------------------------------------------------------------------------- */
+.tap-scale {
+  transition: transform 0.12s ease, opacity 0.12s ease;
+}
+.tap-scale:active {
+  transform: scale(0.97);
+  opacity: 0.9;
+}
+
+/* -----------------------------------------------------------------------------
+   Scrollbar fino (cuando hay scroll en desktop)
+   ----------------------------------------------------------------------------- */
+.overflow-y-auto::-webkit-scrollbar,
+.overflow-auto::-webkit-scrollbar {
+  width: 6px;
+}
+.overflow-y-auto::-webkit-scrollbar-track,
+.overflow-auto::-webkit-scrollbar-track {
+  background: transparent;
+}
+.overflow-y-auto::-webkit-scrollbar-thumb,
+.overflow-auto::-webkit-scrollbar-thumb {
+  background: #d6d3d1; /* stone-300 */
+  border-radius: 3px;
+}
+.overflow-y-auto::-webkit-scrollbar-thumb:hover,
+.overflow-auto::-webkit-scrollbar-thumb:hover {
+  background: #a8a29e; /* stone-400 */
+}
+.dark .overflow-y-auto::-webkit-scrollbar-thumb,
+.dark .overflow-auto::-webkit-scrollbar-thumb {
+  background: #44403c; /* stone-700 */
+}
+.dark .overflow-y-auto::-webkit-scrollbar-thumb:hover,
+.dark .overflow-auto::-webkit-scrollbar-thumb:hover {
+  background: #57534e; /* stone-600 */
+}
+
+/* Ocultar scrollbar en carruseles horizontales (tabs, chips) manteniendo scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* -----------------------------------------------------------------------------
+   Animaciones de entrada (sheets, cards) — sensacion nativa
+   ----------------------------------------------------------------------------- */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in-up {
+  animation: fade-in-up 0.28s ease both;
+}

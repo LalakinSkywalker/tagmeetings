@@ -1,0 +1,12 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/watchdog",
+      "schedule": "*/10 * * * *"
+    },
+    {
+      "path": "/api/cron/almacenamiento",
+      "schedule": "0 9 * * *"
+    }
+  ]
+}

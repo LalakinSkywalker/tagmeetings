@@ -1,0 +1,15 @@
+%% Diagrama del modelo de datos (ERD) — TagTranscriptor
+%% Minimal. Completar al primer PRP que toque schema real (si aplica).
+
+erDiagram
+    profiles ||--o{ transcripciones : owns
+
+    transcripciones {
+        uuid id PK
+        uuid user_id FK
+        text audio_url
+        text texto_transcrito
+        timestamptz created_at
+    }
+
+    %% NOTA: si el proyecto es solo procesamiento sin persistencia, este ERD no aplica.

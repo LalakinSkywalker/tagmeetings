@@ -1,0 +1,42 @@
+{
+  "name": "TagMeetings",
+  "short_name": "TagMeetings",
+  "description": "Asistente de reuniones: graba, transcribe con diarizacion y obten analisis estructurado. Un producto de Bluntag AI Studio.",
+  "start_url": "/dashboard/capturar",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#faf9f7",
+  "theme_color": "#faf9f7",
+  "orientation": "portrait-primary",
+  "categories": ["productivity", "business"],
+  "lang": "es-MX",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Capturar",
+      "short_name": "Capturar",
+      "description": "Grabar o subir un audio para transcribir",
+      "url": "/dashboard/capturar",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
