@@ -91,7 +91,7 @@ interface FuenteItem {
   tipo: string
   nombre_archivo: string | null
   estado: string
-  /** Si está presente, el audio de ESTA fuente fue liberado de R2 (PRP-TT-ALM2). */
+  /** Si está presente, el audio de ESTA fuente fue liberado de R2. */
   audio_liberado_en?: string | null
 }
 
@@ -99,17 +99,17 @@ interface Props {
   transcripcion: Transcripcion
   asksHistory: AskQueryListItem[]
   indexada: boolean
-  /** Nombre legible de la plantilla (predefinida o custom). PRP-TT-V2 Fase 3. */
+  /** Nombre legible de la plantilla (predefinida o custom). */
   plantillaNombre?: string
-  /** Fuentes que componen un análisis multi-fuente. PRP-TT-V2 Fase 4. */
+  /** Fuentes que componen un análisis multi-fuente. */
   fuentes?: FuenteItem[]
-  /** Proyecto al que pertenece la sesión (null = suelta). PRP-TT-V2 Fase 5. */
+  /** Proyecto al que pertenece la sesión (null = suelta). */
   proyectoId?: string | null
-  /** Proyectos del usuario para el selector de asignación. PRP-TT-V2 Fase 5. */
+  /** Proyectos del usuario para el selector de asignación. */
   proyectos?: { id: string; nombre: string }[]
-  /** Plantillas disponibles para re-analizar con otra plantilla. PRP-TT-V2 Fase 5. */
+  /** Plantillas disponibles para re-analizar con otra plantilla. */
   templates?: { id: string; name: string; description: string }[]
-  /** Grupos de plantillas para el selector. PRP-TT-V2 Fase 5. */
+  /** Grupos de plantillas para el selector. */
   grupos?: { label: string; ids: string[] }[]
 }
 
@@ -208,16 +208,16 @@ export function TranscripcionDetalle({ transcripcion, asksHistory, indexada, pla
   const [modoSel, setModoSel] = useState<ModoAnalisis>(
     normalizarModoAnalisis(transcripcion.modo_analisis),
   )
-  // Eje 2 (Fase 5B-C): alcance del contexto del proyecto a inyectar al re-análisis.
+  // Eje 2: alcance del contexto del proyecto a inyectar al re-análisis.
   const [contextoSel, setContextoSel] = useState<ContextoProyectoScope>('ninguno')
   const [, startTransition] = useTransition()
   const router = useRouter()
 
-  // Tab Transcripcion: original vs traduccion (PRP-TT-V2 Fase 2). Si el audio
+  // Tab Transcripcion: original vs traduccion. Si el audio
   // no estaba en espanol, guardamos ambas versiones; el usuario alterna.
   const [verOriginal, setVerOriginal] = useState(false)
 
-  // Edición de texto (Fase 10). Solo sin traducción (evita desync original↔
+  // Edición de texto. Solo sin traducción (evita desync original↔
   // traducción). `cambios` = { índiceSegmento: textoEditado }. `editIdx` = qué
   // segmento está abierto como textarea (click-to-edit, performante en transcripciones largas).
   const [editando, setEditando] = useState(false)
@@ -269,7 +269,7 @@ export function TranscripcionDetalle({ transcripcion, asksHistory, indexada, pla
       : []
   }, [transcripcion.participantes_esperados])
 
-  // Diccionario de nombres reales de hablantes (PRP-TT-003). Se resuelve en
+  // Diccionario de nombres reales de hablantes. Se resuelve en
   // runtime: NO se persiste dentro de segments ni re-indexa embeddings.
   const speakerNames = useMemo<SpeakerNames>(() => {
     const raw = transcripcion.speaker_names
@@ -297,7 +297,7 @@ export function TranscripcionDetalle({ transcripcion, asksHistory, indexada, pla
 
   const analisis = useMemo<Analisis | null>(() => {
     if (transcripcion.analisis && typeof transcripcion.analisis === 'object') {
-      // Sustituye {{sN}} por los nombres reales actuales (PRP-TT-V2 Fase 5):
+      // Sustituye {{sN}} por los nombres reales actuales:
       // renombrar un hablante refleja el cambio en el análisis al instante.
       return resolverTokensSpeakerDeep(transcripcion.analisis, speakerNames) as Analisis
     }
@@ -334,7 +334,7 @@ export function TranscripcionDetalle({ transcripcion, asksHistory, indexada, pla
     }
   }
 
-  // ---- Edición de texto (Fase 10) ----
+  // ---- Edición de texto ----
   const puedeEditarTexto =
     transcripcion.estado === 'completado' &&
     segmentsOriginal.length > 0 &&
@@ -397,13 +397,13 @@ export function TranscripcionDetalle({ transcripcion, asksHistory, indexada, pla
     label: t.name,
   }))
 
-  // Opciones del modo de análisis (Eje 1, PRP-TT-V2 Fase 5B-C).
+  // Opciones del modo de análisis (Eje 1).
   const modoOptions: SelectOption[] = [
     { value: 'rapido', label: MODO_ANALISIS_LABELS.rapido },
     { value: 'profundo', label: MODO_ANALISIS_LABELS.profundo },
   ]
 
-  // Opciones del contexto del proyecto (Eje 2, PRP-TT-V2 Fase 5B-C).
+  // Opciones del contexto del proyecto (Eje 2).
   const contextoOptions: SelectOption[] = [
     { value: 'ninguno', label: 'Sin contexto' },
     { value: 'memoria', label: 'Memoria del proyecto' },
@@ -470,7 +470,7 @@ export function TranscripcionDetalle({ transcripcion, asksHistory, indexada, pla
         </div>
       )}
 
-      {/* Asignar / mover a un proyecto (PRP-TT-V2 Fase 5) */}
+      {/* Asignar / mover a un proyecto */}
       {proyectos && (
         <AsignarProyecto
           transcripcionId={transcripcion.id}
@@ -479,7 +479,7 @@ export function TranscripcionDetalle({ transcripcion, asksHistory, indexada, pla
         />
       )}
 
-      {/* Fuentes del analisis combinado (PRP-TT-V2 Fase 4) */}
+      {/* Fuentes del analisis combinado */}
       {fuentes && fuentes.length > 0 && (
         <Card title={`Fuentes de este análisis (${fuentes.length})`}>
           <ul className="space-y-1.5 text-sm">
@@ -591,7 +591,7 @@ export function TranscripcionDetalle({ transcripcion, asksHistory, indexada, pla
 
           {analisis && (
             <>
-              {/* Re-análisis sin re-transcribir (PRP-TT-V2 Fase 5 / Idea 2) */}
+              {/* Re-análisis sin re-transcribir */}
               <section className="rounded-2xl border border-stone-200/80 bg-white p-4 shadow-sm dark:border-stone-800 dark:bg-stone-900">
                 <div className="mb-3 flex items-center justify-between gap-2">
                   <h3 className="text-[11px] font-bold tracking-wider text-stone-400 uppercase dark:text-stone-500">
@@ -762,7 +762,7 @@ export function TranscripcionDetalle({ transcripcion, asksHistory, indexada, pla
 
       {tab === 'transcripcion' && (
         <div className="space-y-3">
-          {/* Alerta de discrepancia de hablantes (PRP-TT-V2 Fase 2) */}
+          {/* Alerta de discrepancia de hablantes */}
           {hayDiscrepancia && (
             <div className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900 dark:border-amber-900 dark:bg-amber-950 dark:text-amber-100">
               <p className="font-semibold">
@@ -777,7 +777,7 @@ export function TranscripcionDetalle({ transcripcion, asksHistory, indexada, pla
             </div>
           )}
 
-          {/* Roster pre-registrado como ayuda (PRP-TT-V2 Fase 2) */}
+          {/* Roster pre-registrado como ayuda */}
           {rosterEsperado.length > 0 && (
             <div className="rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3 text-xs text-stone-600 dark:border-stone-800 dark:bg-stone-900 dark:text-stone-400">
               <span className="font-semibold text-stone-700 dark:text-stone-300">
@@ -787,7 +787,7 @@ export function TranscripcionDetalle({ transcripcion, asksHistory, indexada, pla
             </div>
           )}
 
-          {/* Toggle original / traduccion (PRP-TT-V2 Fase 2) */}
+          {/* Toggle original / traduccion */}
           {hayTraduccion && (
             <div className="flex items-center gap-1 rounded-2xl bg-stone-100 p-1 dark:bg-stone-900">
               <button
@@ -832,7 +832,7 @@ export function TranscripcionDetalle({ transcripcion, asksHistory, indexada, pla
           )}
           {segments.length > 0 && (
             <>
-              {/* Toolbar de edición de texto (Fase 10) */}
+              {/* Toolbar de edición de texto */}
               {puedeEditarTexto && (
                 <div className="flex items-center justify-between gap-2">
                   <div className="flex items-center gap-1.5">

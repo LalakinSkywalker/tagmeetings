@@ -1,8 +1,8 @@
 // =============================================================================
-// PRP-TT-V2 Fase 6 — Modelo normalizado de export
+// Modelo normalizado de export
 // =============================================================================
 // Fuente unica de los datos que cualquier formato de export consume (TXT, MD,
-// SRT, DOCX, PDF) y que tambien alimenta el archivado en Drive (Fase 6C). Toma
+// SRT, DOCX, PDF) y que tambien alimenta el archivado en Drive. Toma
 // la fila cruda de `transcripciones` y produce un objeto limpio con:
 //   - nombres reales de hablante ya resueltos (Speaker N / nombre del roster),
 //   - marcadores {{sN}} del analisis sustituidos,

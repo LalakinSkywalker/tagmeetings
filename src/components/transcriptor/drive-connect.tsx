@@ -1,7 +1,7 @@
 'use client'
 
 // =============================================================================
-// PRP-TT-V2 Fase 6C — Tarjeta de conexion a Google Drive (Ajustes)
+// Tarjeta de conexion a Google Drive (Ajustes)
 // =============================================================================
 // Conectar = navegacion a /api/drive/connect (inicia el OAuth). Desconectar =
 // server action que borra los tokens. Mobile-native: etiqueta + valor + ⓘ.

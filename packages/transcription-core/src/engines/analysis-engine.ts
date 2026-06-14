@@ -13,7 +13,7 @@ import type {
  * `output_schema` de la plantilla.
  *
  * Implementaciones previstas:
- * - `LLMAnalysisEngine` (Fase 3) — configurable Anthropic/OpenAI/OpenRouter
+ * - `LLMAnalysisEngine` — configurable Anthropic/OpenAI/OpenRouter
  * - `MockAnalysisEngine` (este archivo) — output deterministic basado en la
  *   plantilla recibida, util para validar wiring sin pagar LLM calls.
  */
@@ -26,10 +26,10 @@ export interface AnalysisEngine {
    *   con un marcador estable `{{sN}}` (en vez de "Speaker N") y se le ordena al
    *   modelo usar SIEMPRE ese marcador al referirse a un hablante. Así el
    *   consumidor puede sustituir los marcadores por nombres reales al renderizar
-   *   y renombrar NO requiere re-analizar (cero costo de IA) — PRP-TT-V2 Fase 5.
+   * y renombrar NO requiere re-analizar (cero costo de IA).
    *   Opcional para no cambiar el comportamiento de consumidores existentes
-   *   (ej. otro proyecto, que llama analyze sin opts).
-   * @param opts.model Override por llamada del modelo (PRP-TT-V2 Fase 5B-C).
+   *   (ej. otro consumidor, que llama analyze sin opts).
+   * @param opts.model Override por llamada del modelo.
    * @param opts.reasoningEffort Override por llamada del esfuerzo (modo Rapido/Profundo).
    * @param opts.contextoGlobal Contexto del proyecto (memoria del historico) a
    *   inyectar para que el analisis considere toda la relacion, no solo la sesion.

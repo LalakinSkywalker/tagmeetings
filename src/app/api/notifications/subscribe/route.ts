@@ -1,5 +1,5 @@
 // =============================================================================
-// Fase 9 — Suscripcion / baja de notificaciones push.
+// Suscripcion / baja de notificaciones push.
 // =============================================================================
 // POST   → registra (o refresca) la suscripcion web-push del dispositivo actual.
 // DELETE → da de baja la suscripcion de este dispositivo (por endpoint).

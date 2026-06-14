@@ -1,7 +1,7 @@
 'use server'
 
 // =============================================================================
-// Server actions — Configuracion del usuario (Fase 7)
+// Server actions — Configuracion del usuario
 // =============================================================================
 // getMySettings(): lee los defaults del usuario autenticado (o defaults base).
 // updateMySettings(patch): valida y persiste (upsert) solo los campos provistos.
@@ -150,7 +150,7 @@ export async function updateMySettings(
 }
 
 // -----------------------------------------------------------------------------
-// Marca (Fase 7): perfil + logo del usuario para el branding de los exports.
+// Marca: perfil + logo del usuario para el branding de los exports.
 // -----------------------------------------------------------------------------
 
 /** Actualiza el nombre visible del perfil (tabla profiles). */
@@ -267,7 +267,7 @@ export async function removeBrandLogo(): Promise<{ ok: boolean; error?: string }
  * Suma el peso de los audios del usuario que SIGUEN en R2 (no liberados): tanto
  * los de sesiones single (`transcripciones.audio_size_bytes`) como los de las
  * fuentes de audio/video de sesiones multifuente (`transcripcion_fuentes.size_bytes`,
- * PRP-TT-ALM2). Los documentos (pdf/doc/texto) NO cuentan: este numero significa
+ *). Los documentos (pdf/doc/texto) NO cuentan: este numero significa
  * "lo que se puede liberar". Tolera tamano NULL (cuenta como "desconocido", no
  * rompe). RLS filtra por usuario en ambas tablas.
  */

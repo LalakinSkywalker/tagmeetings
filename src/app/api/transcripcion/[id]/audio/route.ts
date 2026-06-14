@@ -1,5 +1,5 @@
 // =============================================================================
-// PRP-TT-V2 Fase 6 — Descarga del audio original (proxy mismo-origen)
+// Descarga del audio original (proxy mismo-origen)
 // =============================================================================
 // Sirve el audio de R2 al navegador SIN exponer la URL firmada ni la R2 key, y
 // SIN depender del CORS de R2 (el cliente pega contra nuestro propio dominio).

@@ -1,5 +1,5 @@
 // =============================================================================
-// PRP-TT-V2 Fase 6C — Persistencia de la conexion de Drive (tokens cifrados)
+// Persistencia de la conexion de Drive (tokens cifrados)
 // =============================================================================
 // Guarda/lee los tokens OAuth CIFRADOS en drive_connections via service client
 // (los tokens nunca tocan el navegador). Entrega un access_token valido,

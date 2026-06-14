@@ -7,7 +7,7 @@ import type {
  * Interface canonica para almacenamiento de blobs (audio, futuras transcripciones .srt, etc.).
  *
  * Abstrae el origen de almacenamiento. Implementaciones previstas:
- * - `SupabaseStorageAdapter` (Fase 2) — Supabase Storage con bucket privado
+ * - `SupabaseStorageAdapter` — Supabase Storage con bucket privado
  * - `MockStorageAdapter` (este archivo) — URLs fake para validar el flujo
  *
  * IMPORTANTE: el paquete NUNCA expone `service_role` al cliente. El

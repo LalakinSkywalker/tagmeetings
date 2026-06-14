@@ -1,7 +1,7 @@
 'use client'
 
 // =============================================================================
-// PRP-TT-V2 Fase 6A/6B — Descargar y Compartir (hoja inferior mobile-native)
+// Descargar y Compartir (hoja inferior mobile-native)
 // =============================================================================
 // Boton en el header del detalle + hoja inferior con:
 //   - QUE: Analisis / Transcripcion / Audio original / Paquete completo (.zip)

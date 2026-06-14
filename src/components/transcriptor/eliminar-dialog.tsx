@@ -1,7 +1,7 @@
 'use client'
 
 // =============================================================================
-// PRP-TT — Hueco A · Diálogo de confirmación de borrado (1x1 y bulk)
+// — Hueco A · Diálogo de confirmación de borrado (1x1 y bulk)
 // =============================================================================
 // Modal centrado, controlado, vía createPortal al body (el backdrop-blur del
 // header atrapa overlays `fixed`). Operación destructiva → SIEMPRE confirma.

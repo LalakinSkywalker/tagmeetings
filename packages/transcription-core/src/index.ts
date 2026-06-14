@@ -56,7 +56,7 @@ export { MockRagIndex } from './rag/rag-index'
 export { MockStorageAdapter } from './storage/storage-adapter'
 export { MockTranscriptionProvider } from './providers/transcription-provider'
 
-// ---- Implementaciones reales (Fase 2 PRP-TT-001) -------------------------
+// ---- Implementaciones reales -------------------------
 export { DeepgramProvider } from './providers/deepgram-provider'
 export type { DeepgramProviderConfig } from './providers/deepgram-provider'
 export { SupabaseStorageAdapter } from './storage/supabase-storage-adapter'
@@ -65,21 +65,21 @@ export type {
   SupabaseStorageAdapterConfig,
 } from './storage/supabase-storage-adapter'
 
-// ---- Implementaciones reales (Fase 3 PRP-TT-001) -------------------------
+// ---- Implementaciones reales -------------------------
 export { LLMAnalysisEngine, DEFAULT_MODEL_PRICES } from './engines/llm-analysis-engine'
 export type {
   LLMAnalysisEngineConfig,
   ModelPricing,
 } from './engines/llm-analysis-engine'
 
-// ---- Traductor (Fase 2 PRP-TT-V2: multi-idioma → espanol) -----------------
+// ---- Traductor -----------------
 export { LLMTranslator } from './engines/llm-translator'
 export type {
   LLMTranslatorConfig,
   TranslateResult,
 } from './engines/llm-translator'
 
-// ---- Implementaciones reales (Fase 5 PRP-TT-001) -------------------------
+// ---- Implementaciones reales -------------------------
 export {
   PgvectorRagIndex,
   chunkBySpeakerTurn,
@@ -107,10 +107,10 @@ export type {
   OpenRouterChatClientConfig,
 } from './rag/openrouter-chat-client'
 
-// ---- Plantillas de TagTranscriptor (referencia) ---------------------------
-// Cada consumidor puede usar estas o definir las suyas. otro proyecto define
-// sus plantillas veterinarias (SOAP, discharge, treatment_plan) en SU repo,
-// no aqui. Estas son las plantillas de analisis que usa TagTranscriptor.
+// ---- Plantillas de TagMeetings (referencia) ---------------------------
+// Cada consumidor puede usar estas o definir las suyas. Otro consumidor define
+// sus propias plantillas de dominio en SU repo, no aqui. Estas
+// son las plantillas de analisis que usa TagMeetings.
 export {
   PLANTILLA_DISCOVERY,
   PLANTILLA_IDEA_SUELTA,
@@ -133,7 +133,7 @@ export {
   ACTION_ITEM_SCHEMA,
 } from './templates/templates'
 
-// ---- Plantillas customizables por usuario (PRP-TT-V2 Fase 3) --------------
+// ---- Plantillas customizables por usuario --------------
 // El asesor de IA emite una PlantillaSpec; el compilador ensambla un schema
 // strict-valido + prompt_system consistente de forma determinística.
 export {

@@ -1,5 +1,5 @@
 // =============================================================================
-// PRP-TT-V2 Fase 6B — Compartir nativo (Web Share API)
+// Compartir nativo (Web Share API)
 // =============================================================================
 // Patron canonico Bluntag (skill whatsapp-pdf-share): el archivo se comparte
 // como adjunto REAL via la hoja nativa del SO (WhatsApp, Guardar en Archivos,

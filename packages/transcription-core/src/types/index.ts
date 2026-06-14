@@ -2,10 +2,10 @@
 // @bluntag/transcription-core — contrato publico de tipos
 // =============================================================================
 // Estos tipos son el SLA del paquete. Cambios que rompen forma o semantica
-// requieren MAJOR version bump y aviso a consumidores (TagTranscriptor, otro proyecto
-// scribe AI, futuros add-ons Bluntag).
+// requieren MAJOR version bump y aviso a los consumidores del paquete antes
+// de publicar una nueva version.
 //
-// Fase 1 del PRP-TT-001: definicion de contrato + stubs deterministic.
+// Fase 1 del definicion de contrato + stubs deterministic.
 // Implementaciones reales en Fase 2-5.
 // =============================================================================
 
@@ -47,7 +47,7 @@ export interface TranscriptionResult {
    * Idioma DETECTADO por el motor cuando se transcribe en modo auto/multi
    * (BCP-47, ej. "en", "pt"). Puede diferir de `language` (que es el solicitado).
    * Undefined si el motor no lo reporto (ej. se forzo un idioma fijo). Campo
-   * opcional — extension Fase 2 PRP-TT-V2, no rompe consumidores existentes.
+   * opcional — extension Fase 2, no rompe consumidores existentes.
    */
   detected_language?: string
   duration_ms: number
@@ -60,11 +60,11 @@ export interface TranscriptionResult {
 
 /**
  * Plantilla de analisis. El consumidor define una plantilla por caso de uso
- * (Discovery, reunion interna, consulta veterinaria SOAP, llamada legal, etc.).
+ * (Discovery, reunion interna, consulta clinica, llamada legal, etc.).
  *
  * `output_schema` es JSON Schema que valida la respuesta del LLM. El paquete
  * NO procesa el schema en Fase 1 (los stubs ignoran), pero las implementaciones
- * reales (Fase 3) lo usan para forzar respuesta estructurada y validarla con Zod.
+ * reales lo usan para forzar respuesta estructurada y validarla con Zod.
  *
  * `prompt_user_template` soporta placeholders mustache-like: `{{transcript}}`,
  * `{{duration}}`, `{{language}}`. El paquete los reemplaza antes de llamar al LLM.
@@ -83,8 +83,8 @@ export interface AnalysisTemplate {
  * Resultado de analizar una transcripcion con una plantilla.
  *
  * `custom_fields` es la salida estructurada conforme a `output_schema` de la
- * plantilla. Para Discovery puede ser {pain_points, budget_signals}; para SOAP
- * veterinario {soap: {S,O,A,P}, treatment_plan, discharge_instructions}.
+ * plantilla. Para Discovery puede ser {pain_points, budget_signals}; para una
+ * consulta clinica {soap: {S,O,A,P}, treatment_plan, discharge_instructions}.
  * El paquete entrega el objeto; el consumidor decide como persistirlo.
  *
  * `cost_usd` permite tracking de gasto por analisis (tipico LLM call $0.10-0.80
@@ -107,7 +107,7 @@ export interface AnalysisResult {
  * Esfuerzo de razonamiento del LLM (reasoning_effort de OpenRouter/OpenAI).
  * Hogar canonico del tipo (lo consumen el engine de analisis, el traductor y el
  * chat client). Para summarization estructurado simple "minimal" basta; "high"
- * habilita analisis mas profundo (PRP-TT-V2 Fase 5B-C, modo Profundo).
+ * habilita analisis mas profundo.
  */
 export type ReasoningEffort = 'minimal' | 'low' | 'medium' | 'high'
 
@@ -139,7 +139,7 @@ export interface RagChunk {
 }
 
 /**
- * Respuesta a una pregunta hecha contra una transcripcion (Ask Plaud / Ask TagTranscriptor).
+ * Respuesta a una pregunta hecha contra una transcripcion (Ask TagMeetings).
  * El motor recupera chunks relevantes via similaridad coseno y los pasa al LLM
  * con instruccion "responde citando".
  *
@@ -163,7 +163,7 @@ export interface AskCitation {
 
 /**
  * Respuesta a una pregunta hecha contra TODAS las sesiones de un proyecto
- * (Ask cross-sesion — PRP-TT-V2 Fase 5B). Igual que AskResult pero cada cita
+ * (Ask cross-sesion). Igual que AskResult pero cada cita
  * recuerda de que SESION proviene, para que el consumidor pueda mostrar
  * "esto se dijo en la sesion X" con link al momento exacto.
  */
@@ -251,7 +251,7 @@ export interface TranscribeOptions {
    * Version del modelo de diarizacion de Deepgram. Default "latest" (modelo
    * next-gen entrenado con 100k+ voces, mejor separacion de voces parecidas).
    * "v1" usa el diarizador legacy. Solo aplica si diarize !== false. Campo
-   * opcional — extension Fase 2 PRP-TT-V2, no rompe consumidores existentes.
+   * opcional — extension Fase 2, no rompe consumidores existentes.
    */
   diarizeModel?: 'latest' | 'v2' | 'v1'
   /** Agregar puntuacion + capitalizacion. Default true. */

@@ -18,7 +18,7 @@ import { type ModoAnalisis } from '@/lib/transcription/modo-analisis'
 interface Props {
   templates: TemplateOption[]
   grupos: TemplateGrupo[]
-  /** Defaults del usuario (Fase 7): inicializan los selects; override por sesión. */
+  /** Defaults del usuario: inicializan los selects; override por sesión. */
   defaults: CapturaDefaults
 }
 
@@ -113,7 +113,7 @@ export function Grabadora({ templates, grupos, defaults }: Props) {
   const startedAtRef = useRef<number>(0)
   const pausedAccumSecRef = useRef<number>(0)
   const pausedAtRef = useRef<number>(0)
-  // PRP-TT-002: Wake Lock para grabaciones largas (5-6h). Chrome/Edge/Safari 16.4+.
+  // Wake Lock para grabaciones largas (5-6h). Chrome/Edge/Safari 16.4+.
   // Si bloqueas pantalla mientras grabas, sin Wake Lock iOS suspende JS y
   // MediaRecorder se pausa silenciosamente — perdes la grabacion. Con Wake Lock
   // la pantalla se mantiene encendida y la pestana sigue activa.
@@ -408,7 +408,7 @@ export function Grabadora({ templates, grupos, defaults }: Props) {
     if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current)
     drawWaveform()
 
-    // PRP-TT-002: keep-alive defensa en profundidad para grabaciones largas.
+    // keep-alive defensa en profundidad para grabaciones largas.
     void acquireWakeLock()
     startSilentAudioLoop()
   }, [

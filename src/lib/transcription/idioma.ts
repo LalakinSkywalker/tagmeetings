@@ -1,5 +1,5 @@
 // =============================================================================
-// Helpers de idioma + traduccion (PRP-TT-V2 Fase 2)
+// Helpers de idioma + traduccion
 // =============================================================================
 // Centraliza la logica de: (1) decidir si una transcripcion necesita traduccion
 // al espanol, (2) ejecutar la traduccion via el LLMTranslator, y (3) contar
@@ -12,7 +12,7 @@ import type { TranscriptionResult, TranscriptSegment } from '@bluntag/transcript
 import { getTranslator } from './index'
 import { idiomaLabel } from './idiomas'
 
-/** Idioma destino por defecto historico (espanol). Fase 7 lo hace configurable. */
+/** Idioma destino por defecto historico (espanol). a futuro se vuelve configurable. */
 export const TARGET_LANG = 'es-MX'
 
 /** True si el codigo BCP-47 corresponde a espanol (es, es-MX, es-419, ...). */
@@ -76,7 +76,7 @@ export interface TraduccionResult {
 
 /**
  * Decide y ejecuta la traduccion segun la INTENCION configurada por el usuario
- * (Fase 7). `traducirA`:
+ *. `traducirA`:
  *   - `null`  → NO traducir: analizar/indexar en el idioma original.
  *   - codigo  → traducir a ese idioma SI el audio no esta ya en el (ej 'es-MX',
  *               'en'). Si el audio ya esta en el idioma destino, no-op.

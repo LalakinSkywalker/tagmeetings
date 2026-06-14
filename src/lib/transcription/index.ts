@@ -1,7 +1,7 @@
 // =============================================================================
 // Adaptador del app contra @bluntag/transcription-core.
 // =============================================================================
-// Fase 2 (PRP-TT-001): cambia de stubs Mock a providers reales (Deepgram +
+// cambia de stubs Mock a providers reales (Deepgram +
 // SupabaseStorageAdapter). Feature flag USE_MOCK_PROVIDERS=true mantiene los
 // Mocks activos para tests o desarrollo offline.
 //
@@ -43,7 +43,7 @@ function shouldUseMocks(): boolean {
 }
 
 /**
- * Provider real Deepgram Nova-3 (Fase 2). En modo USE_MOCK_PROVIDERS devuelve
+ * Provider real Deepgram Nova-3. En modo USE_MOCK_PROVIDERS devuelve
  * MockTranscriptionProvider para tests/dev offline.
  */
 export function getTranscriptionProvider(): TranscriptionProvider {
@@ -59,7 +59,7 @@ export function getTranscriptionProvider(): TranscriptionProvider {
 }
 
 /**
- * StorageAdapter real Cloudflare R2 (bucket privado, PRP-TT-004). Reemplaza a
+ * StorageAdapter real Cloudflare R2 (bucket privado). Reemplaza a
  * Supabase Storage para librarnos del tope de 50MB/archivo del plan Free de
  * Supabase. R2 es S3-compatible: URLs firmadas SigV4 que Deepgram puede
  * descargar. En modo Mock devuelve MockStorageAdapter con URLs fake.
@@ -130,7 +130,7 @@ export async function deleteStorageObjects(paths: Array<string | null | undefine
 }
 
 /**
- * AnalysisEngine real (Fase 3): LLMAnalysisEngine via OpenRouter con
+ * AnalysisEngine real: LLMAnalysisEngine via OpenRouter con
  * `openai/gpt-5-mini` por default. En modo USE_MOCK_PROVIDERS devuelve
  * MockAnalysisEngine para tests/dev offline.
  *
@@ -156,7 +156,7 @@ export function getAnalysisEngine(): AnalysisEngine {
 }
 
 /**
- * RagIndex real (Fase 5): PgvectorRagIndex con OpenAI text-embedding-3-small
+ * RagIndex real: PgvectorRagIndex con OpenAI text-embedding-3-small
  * + OpenRouter chat completions para Ask. Recibe el supabaseClient del caller
  * — debe ser user-authed (cookies) tanto para index() como ask() porque:
  *   - index() inserta a transcripcion_chunks con RLS auth.uid()=user_id
@@ -211,7 +211,7 @@ export function getRagIndex(
 }
 
 /**
- * Traductor LLM (PRP-TT-V2 Fase 2): traduce transcripciones que no estan en
+ * Traductor LLM: traduce transcripciones que no estan en
  * espanol al espanol, reusando el modelo barato gpt-5-mini via OpenRouter. En
  * modo USE_MOCK_PROVIDERS devuelve null (el flujo Mock siempre es es-MX, no
  * necesita traduccion). Devuelve null si falta la key — el caller trata null
@@ -231,7 +231,7 @@ export function getTranslator(): LLMTranslator | null {
 }
 
 /**
- * Cliente de chat OpenRouter (PRP-TT-V2 Fase 3): usado por el asesor de
+ * Cliente de chat OpenRouter: usado por el asesor de
  * plantillas para (a) conversar en texto libre guiando al usuario y (b) generar
  * la PlantillaSpec en JSON strict. Reusa la misma key + modelo gpt-5-mini que el
  * resto del motor. Lanza si falta la key (no degrada — el asesor no tiene sentido
@@ -258,7 +258,7 @@ export const TEMPLATES_AVAILABLE: AnalysisTemplate[] =
 
 /**
  * Resuelve una plantilla por id, aplicando aliases de plantillas legacy
- * (PRP-TT-V2 Fase 2): si el id ya no existe pero tiene alias (ej.
+ *: si el id ya no existe pero tiene alias (ej.
  * 'presencial-prospecto' → 'discovery' tras la fusion), devuelve la vigente.
  * Devuelve undefined si no hay plantilla ni alias. Usar en TODO lugar que
  * resuelva template_id de una transcripcion (re-analisis, webhook).
@@ -291,7 +291,7 @@ interface PlantillaUsuarioRow {
 }
 
 /**
- * Resuelve una plantilla por template_id cubriendo AMBOS casos (PRP-TT-V2 Fase 3):
+ * Resuelve una plantilla por template_id cubriendo AMBOS casos:
  *   - predefinidas (sincrono, via resolveTemplate / aliases), y
  *   - de usuario (`custom:<uuid>`): lee `plantillas_usuario` con el cliente dado.
  *
@@ -335,7 +335,7 @@ export async function resolveTemplateAsync(
 
 /**
  * Agrupacion de plantillas (General vs Ventas y negocio) para el selector de UI.
- * Reexport del paquete — mejor guia, PRP-TT-V2 Fase 2.
+ * Reexport del paquete — mejor guia.
  */
 export const TEMPLATE_GRUPOS: Array<{ label: string; ids: string[] }> =
   PLANTILLAS_GRUPOS

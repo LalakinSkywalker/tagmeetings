@@ -1,5 +1,5 @@
 // =============================================================================
-// PRP-TT-V2 Fase 6C — Cifrado simetrico de secretos (AES-256-GCM)
+// Cifrado simetrico de secretos (AES-256-GCM)
 // =============================================================================
 // Cifra/descifra los tokens OAuth de Google Drive antes de guardarlos en BD.
 // AES-256-GCM = cifrado autenticado (detecta manipulacion). La llave vive en

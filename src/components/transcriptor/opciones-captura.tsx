@@ -1,7 +1,7 @@
 'use client'
 
 // =============================================================================
-// OpcionesCaptura — bloque de opciones previo a grabar/subir (PRP-TT-V2 Fase 2)
+// OpcionesCaptura — bloque de opciones previo a grabar/subir
 // =============================================================================
 // Componente presentacional CONTROLADO (el padre tiene el estado). Reune en un
 // solo lugar las opciones que comparten la Grabadora y SubirArchivos:
@@ -33,7 +33,7 @@ import {
  *  codigo de idioma real ('no' = Noruego colisiona). */
 export const TRADUCIR_NONE = '__none__'
 
-/** Defaults de captura resueltos desde la config del usuario (Fase 7). */
+/** Defaults de captura resueltos desde la config del usuario. */
 export interface CapturaDefaults {
   idioma: string
   traducirA: string | null
@@ -59,14 +59,14 @@ interface Props {
   onTemplateId: (id: string) => void
   idioma: string
   onIdioma: (v: string) => void
-  /** Intención de traducción de la sesión (Fase 7): `null` = no traducir. */
+  /** Intención de traducción de la sesión: `null` = no traducir. */
   traducirA: string | null
   onTraducirA: (v: string | null) => void
   numSpeakers: string
   onNumSpeakers: (v: string) => void
   roster: string
   onRoster: (v: string) => void
-  /** Modo de análisis (PRP-TT-V2 Fase 5B-C, Eje 1): 'rapido' | 'profundo'. */
+  /** Modo de análisis: 'rapido' | 'profundo'. */
   modo: ModoAnalisis
   onModo: (v: ModoAnalisis) => void
   disabled?: boolean

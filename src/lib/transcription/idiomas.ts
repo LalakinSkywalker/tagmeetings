@@ -1,5 +1,5 @@
 // =============================================================================
-// idiomas — fuente UNICA de los idiomas que el motor cubre (Fase 7)
+// idiomas — fuente UNICA de los idiomas que el motor cubre
 // =============================================================================
 // Antes esta lista vivia incrustada en `opciones-captura.tsx` (client). Se
 // extrajo aqui (server-safe, sin 'use client') para que la usen, sin duplicar:

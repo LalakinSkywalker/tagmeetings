@@ -1,5 +1,5 @@
 // =============================================================================
-// Modo de analisis — Rapido / Profundo (PRP-TT-V2 Fase 5B-C, Eje 1)
+// Modo de analisis — Rapido / Profundo
 // =============================================================================
 // Eje 1 del control de profundidad: el usuario elige cuanto "piensa" la IA al
 // analizar/re-analizar una sesion. Unica fuente de verdad del mapeo modo →
@@ -9,7 +9,7 @@
 // V1 (decision de producto del PRP, seccion 13): el modo Profundo sube el
 // reasoning_effort a 'high' pero MANTIENE el modelo default (gpt-5-mini). Escalar
 // a un modelo superior solo en Profundo queda diferido hasta que las pruebas
-// reales lo justifiquen — protege el consumo de IA que Eduardo absorbe en V1.
+// reales lo justifiquen — protege el consumo de IA en V1.
 // Cuando se decida escalar, basta devolver un modelo en `modoToModel`.
 // =============================================================================
 

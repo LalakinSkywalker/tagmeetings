@@ -1,7 +1,7 @@
 'use client'
 
 // =============================================================================
-// ScrollToTop — botón flotante "volver arriba" (PRP-TT — Hueco B, UX)
+// ScrollToTop — botón flotante "volver arriba"
 // =============================================================================
 // Aparece al bajar en una página larga (ej. una transcripción con muchos
 // segmentos) y, al tocarlo, regresa al inicio. Vive en la esquina inferior

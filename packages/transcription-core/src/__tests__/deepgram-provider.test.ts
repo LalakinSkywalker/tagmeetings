@@ -27,7 +27,7 @@ const SAMPLE_DEEPGRAM_RESPONSE = {
   },
 }
 
-// Respuesta con idioma detectado por canal (modo multi/auto, PRP-TT-V2 Fase 2)
+// Respuesta con idioma detectado por canal (modo multi/auto)
 const RESPONSE_CON_DETECTED = {
   metadata: { duration: 5 },
   results: {
@@ -174,7 +174,7 @@ describe('DeepgramProvider', () => {
       const { fetchFn, urls } = captureFetch()
       const provider = new DeepgramProvider({ apiKey: 'k', fetchFn })
       await provider.transcribe('https://example.com/a.mp3')
-      // PRP-TT-V2 Fase 2: diarize_model=latest reemplaza al flag legacy diarize=true
+      // diarize_model=latest reemplaza al flag legacy diarize=true
       expect(urls[0]).toContain('model=nova-3')
       expect(urls[0]).toContain('diarize_model=latest')
       expect(urls[0]).toContain('utterances=true')
@@ -197,7 +197,7 @@ describe('DeepgramProvider', () => {
     })
   })
 
-  describe('transcribe — idioma multi + detected_language (PRP-TT-V2 Fase 2)', () => {
+  describe('transcribe — idioma multi + detected_language', () => {
     it('auto / multi / codigo-inexistente -> language=multi', async () => {
       const { fetchFn, urls } = captureFetch()
       const provider = new DeepgramProvider({ apiKey: 'k', fetchFn })
@@ -245,7 +245,7 @@ describe('DeepgramProvider', () => {
   })
 
   // ==========================================================================
-  // PRP-TT-002 — flujo async via callback
+  // — flujo async via callback
   // ==========================================================================
   describe('transcribeAsync — happy path', () => {
     it('agrega callback URL al query string y retorna request_id del ack', async () => {

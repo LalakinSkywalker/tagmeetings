@@ -1,5 +1,5 @@
 // =============================================================================
-// PRP-TT-V2 Fase 6C — Cliente REST de Google Drive (fetch directo)
+// Cliente REST de Google Drive (fetch directo)
 // =============================================================================
 // Con scope drive.file: crea carpetas y sube archivos que la app genera. No lee
 // ni toca nada mas del Drive del usuario. SOLO server-side.

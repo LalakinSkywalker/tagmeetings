@@ -1,10 +1,10 @@
 'use client'
 
 // =============================================================================
-// AjustesMarca — perfil + branding del usuario para los exports (Fase 7)
+// AjustesMarca — perfil + branding del usuario para los exports
 // =============================================================================
 // - Nombre del perfil (profiles.full_name).
-// - Logo (R2): subir PNG/JPG, preview, quitar. Aparece en el PDF (Fase 6).
+// - Logo (R2): subir PNG/JPG, preview, quitar. Aparece en el PDF.
 // - Color de marca: el acento del PDF. Solo el primario (el que realmente influye
 //   el export); no exponemos un secundario decorativo (config siempre influye el comportamiento real).
 // Patrón mobile-native: label + ⓘ + control, tap-scale, guardado con feedback.

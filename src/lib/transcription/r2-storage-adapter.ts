@@ -1,7 +1,7 @@
 // =============================================================================
 // R2StorageAdapter — implementacion de StorageAdapter contra Cloudflare R2
 // =============================================================================
-// Reemplaza a SupabaseStorageAdapter (PRP-TT-004). R2 es S3-compatible, asi que
+// Reemplaza a SupabaseStorageAdapter. R2 es S3-compatible, asi que
 // generamos URLs firmadas SigV4 (PUT para subir, GET para descargar). Deepgram
 // descarga el audio desde la URL firmada GET (publicamente accesible + temporal,
 // el patron recomendado por Deepgram).

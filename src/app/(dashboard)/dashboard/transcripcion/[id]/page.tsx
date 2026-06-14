@@ -72,17 +72,17 @@ export default async function TranscripcionDetallePage({ params }: PageProps) {
       ])
 
   // Nombre legible de la plantilla (predefinida o custom del usuario). Para
-  // custom el chip mostraria "custom:<uuid>" sin esto (PRP-TT-V2 Fase 3).
+  // custom el chip mostraria "custom:<uuid>" sin esto.
   const plantilla = await resolveTemplateAsync(supabase, data.template_id, user.id)
   const plantillaNombre = plantilla?.name ?? data.template_id
 
-  // Proyectos del usuario para el selector de asignación (PRP-TT-V2 Fase 5).
+  // Proyectos del usuario para el selector de asignación.
   const proyectos = (await listarProyectos()).map((p) => ({ id: p.id, nombre: p.nombre }))
 
-  // Plantillas disponibles para re-analizar con otra plantilla (PRP-TT-V2 Fase 5).
+  // Plantillas disponibles para re-analizar con otra plantilla.
   const { templates, grupos } = await buildTemplateSelectorData()
 
-  // Fuentes que componen un analisis multi-fuente (PRP-TT-V2 Fase 4).
+  // Fuentes que componen un analisis multi-fuente.
   const fuentes = data.es_multifuente
     ? (
         await supabase
@@ -94,7 +94,7 @@ export default async function TranscripcionDetallePage({ params }: PageProps) {
     : []
 
   // El motor de export vive en /api/.../export (server). Aqui solo pasamos lo
-  // minimo para armar la hoja de descarga (PRP-TT-V2 Fase 6).
+  // minimo para armar la hoja de descarga.
   // Para multifuente, audio_path es el placeholder 'multifuente' (no un archivo
   // real): no hay UN audio unico que descargar/archivar, asi que no se ofrece.
   // El audio liberado (Bloque Almacenamiento) ya no existe en R2: no se ofrece
@@ -102,7 +102,7 @@ export default async function TranscripcionDetallePage({ params }: PageProps) {
   const audioDisponible =
     Boolean(data.audio_path) && data.audio_path !== 'multifuente' && !data.audio_liberado_en
 
-  // ¿Drive conectado? (Fase 6C). Query directa: el user ya está resuelto. RLS
+  // ¿Drive conectado?. Query directa: el user ya está resuelto. RLS
   // de drive_connections filtra por auth.uid(); no leemos las columnas de tokens.
   const { data: driveConn } = await supabase
     .from('drive_connections')

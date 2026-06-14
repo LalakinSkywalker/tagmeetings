@@ -1,5 +1,5 @@
 // =============================================================================
-// LLMTranslator — traduccion de transcripciones a un idioma destino (PRP-TT-V2 Fase 2)
+// LLMTranslator — traduccion de transcripciones a un idioma destino
 // =============================================================================
 // Cuando un audio no esta en espanol, Deepgram lo transcribe en su idioma
 // original. Este traductor toma los segments y los traduce al espanol (o al

@@ -1,7 +1,7 @@
 'use client'
 
 // =============================================================================
-// PlantillaEditor — asesor conversacional + editor de spec (PRP-TT-V2 Fase 3)
+// PlantillaEditor — asesor conversacional + editor de spec
 // =============================================================================
 // Dos modos:
 //   - crear: chat con el asesor IA → "Generar plantilla" → spec editable → guardar.

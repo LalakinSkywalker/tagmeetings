@@ -72,7 +72,7 @@ export interface LLMAnalysisEngineConfig {
   modelPrices?: Record<string, ModelPricing>
   /**
    * Headers extra para OpenRouter (HTTP-Referer + X-Title son recomendados
-   * pero opcionales). Default {} — se setean por default a TagTranscriptor.
+   * pero opcionales). Default {} — se setean por default a TagMeetings.
    */
   extraHeaders?: Record<string, string>
 }
@@ -115,7 +115,7 @@ function renderUserPrompt(
   transcription: TranscriptionResult,
   opts?: { speakerTokens?: boolean },
 ): string {
-  // Modo marcador (PRP-TT-V2 Fase 5): etiquetamos cada hablante con un token
+  // Modo marcador: etiquetamos cada hablante con un token
   // estable {{sN}} en vez de "Speaker N". El consumidor sustituye esos tokens
   // por los nombres reales AL RENDERIZAR, así renombrar un hablante NO requiere
   // re-analizar (cero costo de IA). Sin el flag, comportamiento clásico.
@@ -249,14 +249,14 @@ export class LLMAnalysisEngine implements AnalysisEngine {
     template: AnalysisTemplate,
     opts?: {
       speakerTokens?: boolean
-      /** Override por LLAMADA del modelo (PRP-TT-V2 Fase 5B-C, modo Profundo). */
+      /** Override por LLAMADA del modelo. */
       model?: string
       /** Override por LLAMADA del reasoning_effort (modo Rapido/Profundo por sesion). */
       reasoningEffort?: ReasoningEffort
       /**
        * Contexto del proyecto (memoria + resumenes del historico) a inyectar al
        * prompt para que el analisis considere la relacion completa, no solo la
-       * sesion de hoy (PRP-TT-V2 Fase 5B-C, re-analisis con contexto global).
+       * sesion de hoy.
        */
       contextoGlobal?: string
     },
@@ -266,7 +266,7 @@ export class LLMAnalysisEngine implements AnalysisEngine {
     const modelToUse = opts?.model ?? ext.model ?? this.model
     const effortToUse = opts?.reasoningEffort ?? ext.reasoning_effort ?? this.defaultReasoningEffort
 
-    // Modo marcador (PRP-TT-V2 Fase 5): cuando el consumidor pide tokens, las
+    // Modo marcador: cuando el consumidor pide tokens, las
     // plantillas instruyen "referencia speakers como Speaker 0/1"; anexamos una
     // directiva de PRIORIDAD para que el modelo escriba el token literal {{sN}}.
     // El consumidor luego sustituye {{sN}} por el nombre real al renderizar, así

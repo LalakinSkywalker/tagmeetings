@@ -1,7 +1,7 @@
 import 'server-only'
 
 // =============================================================================
-// watchdog — barrido de jobs async atorados (Fase 10, Robustez)
+// watchdog — barrido de jobs async atorados
 // =============================================================================
 // El flujo async (Deepgram callback) puede dejar jobs huérfanos: un callback que
 // nunca llega (audio grande), o trabajo en `after()` que excede el presupuesto

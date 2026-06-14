@@ -1,7 +1,7 @@
 'use client'
 
 // =============================================================================
-// Fase 9 — Hook de suscripcion a notificaciones push.
+// Hook de suscripcion a notificaciones push.
 // =============================================================================
 // Expone el estado (soportado / permiso / suscrito) y dos acciones (subscribe /
 // unsubscribe). La VAPID public key viene de NEXT_PUBLIC_VAPID_PUBLIC_KEY y se

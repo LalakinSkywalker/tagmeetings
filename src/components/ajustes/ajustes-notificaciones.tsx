@@ -1,7 +1,7 @@
 'use client'
 
 // =============================================================================
-// AjustesNotificaciones — activar/desactivar push + prueba (Fase 9)
+// AjustesNotificaciones — activar/desactivar push + prueba
 // =============================================================================
 // Activa las notificaciones push de este dispositivo (pide permiso + suscribe) y
 // permite enviar una notificacion de prueba para confirmar de punta a punta. El

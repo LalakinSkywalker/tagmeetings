@@ -1,7 +1,7 @@
 import 'server-only'
 
 // =============================================================================
-// extract-text — extracción de texto de PDF / DOCX / texto plano (Fase 4)
+// extract-text — extracción de texto de PDF / DOCX / texto plano
 // =============================================================================
 // Para fuentes no-audio (documentos) extraemos su texto server-side y lo
 // sumamos al análisis combinado. Imports DINÁMICOS (unpdf, mammoth) para no

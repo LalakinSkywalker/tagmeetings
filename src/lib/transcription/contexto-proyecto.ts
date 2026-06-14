@@ -2,7 +2,7 @@ import 'server-only'
 
 // =============================================================================
 // Contexto del proyecto para re-analisis con memoria global
-// (PRP-TT-V2 Fase 5B-C — Eje 2: alcance temporal + contexto global)
+//
 // =============================================================================
 // Construye el bloque de CONTEXTO que se inyecta al prompt del re-analisis de
 // una sesion para que el analisis considere el HISTORICO de la relacion, no solo

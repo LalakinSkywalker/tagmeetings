@@ -1,7 +1,7 @@
 'use server'
 
 // =============================================================================
-// Server actions — Notificaciones push (Fase 9)
+// Server actions — Notificaciones push
 // =============================================================================
 // enviarPushDePrueba(): manda un push al usuario actual a TODOS sus dispositivos
 // suscritos. Lo usa el boton "Enviar prueba" de Ajustes para confirmar de punta

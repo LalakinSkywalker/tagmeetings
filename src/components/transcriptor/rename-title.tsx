@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { renombrarTranscripcion } from '@/actions/transcripciones'
 
 /**
- * Dialog para renombrar la transcripcion (Fase 1, quick win). Controlado: el
+ * Dialog para renombrar la transcripcion. Controlado: el
  * trigger vive afuera (el menu de acciones del header). Llama al server action
  * renombrarTranscripcion (auth + ownership + sanitizacion).
  */

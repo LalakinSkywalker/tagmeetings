@@ -9,7 +9,7 @@ import type {
  * Interface canonica para motores de transcripcion (speech-to-text).
  *
  * Implementaciones previstas:
- * - `DeepgramProvider` (Fase 2) — Deepgram Nova-3 batch + streaming + callback async (PRP-TT-002)
+ * - `DeepgramProvider` — Deepgram Nova-3 batch + streaming + callback async
  * - `WhisperProvider` (alternativa retrofit) — OpenAI Whisper API
  * - `MockTranscriptionProvider` (este archivo) — datos deterministic para tests/dev
  *
@@ -86,7 +86,7 @@ export interface AsyncTranscriptionProvider extends TranscriptionProvider {
 /**
  * Stub deterministic para tests, dev y validacion del contrato sin pagar
  * llamadas reales a Deepgram. Retorna la MISMA respuesta siempre — util
- * para que el Claudio de otro proyecto valide su integracion sin coste.
+ * para validar la integracion del contrato sin coste.
  *
  * Hardcoded a una conversacion de 2 speakers en es-MX de 15 segundos.
  */

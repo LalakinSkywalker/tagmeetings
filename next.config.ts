@@ -6,7 +6,7 @@ const isDev = process.env.NODE_ENV !== "production";
 // (hidratacion). blob: se mantiene en media-src (MediaRecorder genera blob: URLs)
 // y worker-src (Service Worker PWA registra desde blob: en algunos casos).
 //
-// PRP-TT-V2 Fase 6 — export PDF con @react-pdf/renderer: su motor de layout
+// export PDF con @react-pdf/renderer: su motor de layout
 // (yoga-layout) compila un modulo WebAssembly y lo carga desde una URL data:.
 // Por eso, y SOLO por eso, el CSP necesita:
 //   - script-src 'wasm-unsafe-eval': permite COMPILAR WebAssembly sin habilitar
@@ -17,11 +17,11 @@ const connectSrcSources = [
   "'self'",
   "https://*.supabase.co",
   "wss://*.supabase.co",
-  // Cloudflare R2 (PRP-TT-004): subida directa del audio via PUT a URL firmada.
+  // Cloudflare R2: subida directa del audio via PUT a URL firmada.
   // El bucket usa virtual-hosted-style (<bucket>.<account>.r2.cloudflarestorage.com),
   // el wildcard cubre ambos niveles de subdominio.
   "https://*.r2.cloudflarestorage.com",
-  // @react-pdf/yoga-layout carga su wasm desde una URL data: (PRP-TT-V2 Fase 6).
+  // @react-pdf/yoga-layout carga su wasm desde una URL data:.
   "data:",
   ...(isDev
     ? ["ws://localhost:*", "ws://127.0.0.1:*", "http://localhost:*"]
@@ -81,7 +81,7 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: ["127.0.0.1"],
   // Paquetes locales del workspace que Next.js debe transpilar (TypeScript directo
   // desde packages/*/src/ sin paso de build separado). Patron canonico Vercel
-  // para monorepos internos. Ver PRP-TT-001 Fase 1.
+  // para monorepos internos. Ver Fase 1.
   transpilePackages: ["@bluntag/transcription-core"],
   async headers() {
     return [

@@ -1,7 +1,7 @@
 import 'server-only'
 
 // =============================================================================
-// pipeline — pasos compartidos de post-transcripción (Fase 4)
+// pipeline — pasos compartidos de post-transcripción
 // =============================================================================
 // `analizarYCompletar` encapsula traducir → analizar (LLM) → indexar (RAG) →
 // completar. Lo usan AMBOS flujos:
@@ -54,12 +54,12 @@ export async function analizarYCompletar(
   transcription: TranscriptionResult,
   persistInicial: Record<string, unknown>,
   /**
-   * Modo de análisis de la sesión (PRP-TT-V2 Fase 5B-C, Eje 1). Determina el
+   * Modo de análisis de la sesión. Determina el
    * reasoning_effort del LLM en el PRIMER análisis. Default 'rapido' (actual).
    */
   modoAnalisis: ModoAnalisis = MODO_ANALISIS_DEFAULT,
   /**
-   * Intención de traducción de la sesión (Fase 7). `null` = no traducir (analizar
+   * Intención de traducción de la sesión. `null` = no traducir (analizar
    * en el idioma original); código = traducir a ese idioma. Default histórico:
    * español. El webhook/sync lo leen de `transcripciones.traducir_a`.
    */
@@ -113,7 +113,7 @@ export async function analizarYCompletar(
     const engine = getAnalysisEngine()
     // Modo marcador {{sN}}: el primer análisis ya guarda tokens en vez de
     // "Speaker N", así renombrar hablantes después se refleja al instante sin
-    // re-analizar (PRP-TT-V2 Fase 5). El render sustituye los tokens.
+    // re-analizar. El render sustituye los tokens.
     analisis = await engine.analyze(transcriptionAnalisis, plantilla, {
       speakerTokens: true,
       reasoningEffort: modoToReasoningEffort(modoAnalisis),
@@ -165,7 +165,7 @@ export async function analizarYCompletar(
     .update({ estado: 'completado', cost_usd_total: costTotal, completed_at: new Date().toISOString() })
     .eq('id', transcripcionId)
 
-  // ---- 8. Avisar al usuario por push (Fase 9). Punto unico de "ya esta lista":
+  // ---- 8. Avisar al usuario por push. Punto unico de "ya esta lista":
   // ambos flujos (single y multifuente) y el watchdog/reintento pasan por aqui.
   // Best-effort (el helper traga sus errores); nunca rompe el pipeline.
   await notificarTranscripcionLista(transcripcionId, userId)

@@ -1,12 +1,12 @@
 // =============================================================================
-// PRP-TT-V2 Fase 6 — Generador PDF con branding (@react-pdf/renderer)
+// Generador PDF con branding (@react-pdf/renderer)
 // =============================================================================
 // Construye los documentos PDF (elementos React de @react-pdf, NO del DOM). El
 // render a Blob/Buffer lo hace el call site:
 //   - cliente (descarga / compartir): pdfElementToBlob()
-//   - server (descarga + archivado en Drive, Fase 6C): renderToBuffer()
+// - server (descarga + archivado en Drive, Fase 6C): renderToBuffer()
 //
-// Fase 7 — Branding del usuario: color de acento + logo opcionales. Si el usuario
+// Branding del usuario: color de acento + logo opcionales. Si el usuario
 // configuró su marca (Ajustes), se inyecta aquí. Sin branding → naranja Bluntag +
 // wordmark "TagMeetings" (default histórico).
 //
@@ -36,7 +36,7 @@ const DEFAULT_BRAND = '#ff8133'
 const GRAY = '#78716c'
 const DARK = '#1c1917'
 
-/** Branding del PDF (Fase 7). Resuelto server-side desde user_settings. */
+/** Branding del PDF. Resuelto server-side desde user_settings. */
 export interface PdfBranding {
   /** Color de acento (hex #rrggbb). Default naranja Bluntag. */
   accent?: string

@@ -1,7 +1,7 @@
 'use server'
 
 // =============================================================================
-// Server actions — Plantillas customizables con asesor de IA (PRP-TT-V2 Fase 3)
+// Server actions — Plantillas customizables con asesor de IA
 // =============================================================================
 // Tres bloques:
 //   1. ASESOR conversacional: conversarAsesor() devuelve texto libre que guía al

@@ -1,5 +1,5 @@
 // =============================================================================
-// Webhook receiver — Deepgram callback async (PRP-TT-002 + Fase 4 multi-fuente).
+// Webhook receiver — Deepgram callback async.
 // =============================================================================
 // Endpoint publico (sin auth de usuario). Protegido por secret-per-request:
 //   1. Al lanzar Deepgram async generamos un UUID v4 y lo persistimos:
@@ -12,7 +12,7 @@
 //      las fuentes del padre terminaron (barrera con compare-and-swap).
 //   5. Anulamos el secret tras procesar para prevenir replay.
 //
-// ROBUSTEZ — fast-200 + background (Fase 10, 2026-06-04):
+// ROBUSTEZ — fast-200 + background:
 //   El trabajo PESADO (traducir + LLM + indexar, o combinar N fuentes) NO corre
 //   antes de responderle a Deepgram. Hacemos un claim/persist LIVIANO y SINCRONO
 //   (compare-and-swap que tambien dedupea retries), respondemos 200 al instante,
@@ -76,7 +76,7 @@ function parsearBody(
 }
 
 // -----------------------------------------------------------------------------
-// SINGLE-AUDIO: callback de 1 transcripción (flujo PRP-TT-002).
+// SINGLE-AUDIO: callback de 1 transcripción (flujo).
 // -----------------------------------------------------------------------------
 async function handleSingle(
   supabase: ReturnType<typeof createServiceClient>,
@@ -179,7 +179,7 @@ async function handleSingle(
 }
 
 // -----------------------------------------------------------------------------
-// MULTI-FUENTE: callback de 1 fuente de un padre combinado (Fase 4).
+// MULTI-FUENTE: callback de 1 fuente de un padre combinado.
 // -----------------------------------------------------------------------------
 async function handleFuente(
   supabase: ReturnType<typeof createServiceClient>,

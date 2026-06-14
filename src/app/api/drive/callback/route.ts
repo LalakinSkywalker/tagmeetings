@@ -1,5 +1,5 @@
 // =============================================================================
-// PRP-TT-V2 Fase 6C — Callback del OAuth de Google Drive
+// Callback del OAuth de Google Drive
 // =============================================================================
 // Verifica el `state` (anti-CSRF), intercambia el code por tokens, los CIFRA y
 // guarda, y vuelve a Ajustes con un parametro de resultado.

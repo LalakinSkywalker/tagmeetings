@@ -1,7 +1,7 @@
 'use server'
 
 // =============================================================================
-// Server actions — Proyectos con memoria (PRP-TT-V2 Fase 5, Bloque 5A)
+// Server actions — Proyectos con memoria
 // =============================================================================
 // Un Proyecto agrupa sesiones (transcripciones) de un cliente/relacion a traves
 // del tiempo. Sesiones sueltas permitidas (proyecto_id NULL). Bloque 5A cubre:
@@ -70,14 +70,14 @@ export interface ProyectoDetalle {
   memoriaStale: boolean
   /** Sesiones del proyecto en estado 'completado' (las que alimentan la memoria). */
   sesionesCompletadasCount: number
-  /** Tablero de pendientes vivo (PRP-TT-V2 Fase 5B-D). */
+  /** Tablero de pendientes vivo. */
   pendientes: PendienteDTO[]
   pendientesGeneradosAt: string | null
   /** true si hay sesiones nuevas/cambiadas desde que se generó el tablero. */
   pendientesStale: boolean
 }
 
-/** Un pendiente del tablero vivo del proyecto (PRP-TT-V2 Fase 5B-D). */
+/** Un pendiente del tablero vivo del proyecto. */
 export interface PendienteDTO {
   id: string
   texto: string
@@ -290,7 +290,7 @@ export async function obtenerProyectoDetalle(id: string): Promise<ProyectoDetall
     memoriaStale = sesionesCompletadasCount !== memoriaSesionesCount || hayCambioReciente
   }
 
-  // ---- Tablero de pendientes vivo (PRP-TT-V2 Fase 5B-D) + staleness.
+  // ---- Tablero de pendientes vivo + staleness.
   const { data: pendientesRaw } = await supabase
     .from('pendientes')
     .select(
@@ -485,7 +485,7 @@ export async function asignarSesionAProyecto(
 }
 
 // -----------------------------------------------------------------------------
-// Ask cross-sesion a nivel proyecto (PRP-TT-V2 Fase 5B)
+// Ask cross-sesion a nivel proyecto
 // -----------------------------------------------------------------------------
 // Pregunta sobre el HISTORICO de TODAS las sesiones de un proyecto a la vez
 // ("¿que le promet a Mario en 3 meses?"). Reusa el RAG pgvector pero con el RPC
@@ -665,7 +665,7 @@ export async function listarAskProyecto(
 }
 
 // -----------------------------------------------------------------------------
-// Memoria del historico — resumen jerarquico del proyecto (PRP-TT-V2 Fase 5B)
+// Memoria del historico — resumen jerarquico del proyecto
 // -----------------------------------------------------------------------------
 // Sintetiza los resumenes de TODAS las sesiones analizadas del proyecto en un
 // meta-resumen (resumen de resumenes). Resuelve el limite de tokens: no manda
@@ -816,7 +816,7 @@ export async function generarMemoriaProyecto(proyectoId: string): Promise<Memori
 }
 
 // =============================================================================
-// Tablero de pendientes VIVO (PRP-TT-V2 Fase 5B-D)
+// Tablero de pendientes VIVO
 // =============================================================================
 // Agrega los action_items de TODAS las sesiones del proyecto; la IA propone un
 // estado (pendiente/en_curso/hecho) considerando la linea de tiempo (un

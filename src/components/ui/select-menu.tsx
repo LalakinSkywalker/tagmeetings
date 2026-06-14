@@ -1,7 +1,7 @@
 'use client'
 
 // =============================================================================
-// SelectMenu — menú desplegable unificado de toda la app (PRP-TT ajustes UI).
+// SelectMenu — menú desplegable unificado de toda la app.
 // =============================================================================
 // Un solo componente para TODOS los desplegables (plantilla, idioma, filtros,
 // tipo de campo). Reemplaza la mezcla de <select> nativos + combobox ad-hoc.

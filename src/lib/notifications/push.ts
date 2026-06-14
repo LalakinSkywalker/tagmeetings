@@ -1,7 +1,7 @@
 import 'server-only'
 
 // =============================================================================
-// Fase 9 — Motor de envio de notificaciones push (web-push + VAPID).
+// Motor de envio de notificaciones push (web-push + VAPID).
 // =============================================================================
 // `enviarPushAUsuario` lee las suscripciones del usuario (service client, bypassa
 // RLS porque corre en background sin sesion: webhook / watchdog) y manda el push

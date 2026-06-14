@@ -1,7 +1,7 @@
 'use client'
 
 // =============================================================================
-// ReintentarBoton — dispara el reintento manual de una transcripción (Fase 10)
+// ReintentarBoton — dispara el reintento manual de una transcripción
 // =============================================================================
 // Reutilizable en la vista de detalle (estado error) y en el poller (cuando un
 // job lleva demasiado tiempo). Llama al server action reintentarTranscripcion,

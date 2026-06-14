@@ -1,5 +1,5 @@
 // =============================================================================
-// Cron — Watchdog de jobs async atorados (Fase 10, Robustez)
+// Cron — Watchdog de jobs async atorados
 // =============================================================================
 // Vercel Cron invoca este endpoint (GET) según el schedule de `vercel.json`.
 // Protegido con CRON_SECRET: Vercel adjunta automáticamente

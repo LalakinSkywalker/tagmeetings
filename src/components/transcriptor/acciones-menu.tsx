@@ -1,7 +1,7 @@
 'use client'
 
 // =============================================================================
-// PRP-TT-V2 Fase 6 — Menú de acciones del detalle (kebab ⋮)
+// Menú de acciones del detalle (kebab ⋮)
 // =============================================================================
 // Un solo botón de tres puntos en el header agrupa las acciones de la sesión:
 // Editar (renombrar), Descargar / Compartir, y Archivar en Drive. Unifica lo

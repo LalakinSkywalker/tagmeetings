@@ -1,7 +1,7 @@
 import 'server-only'
 
 // =============================================================================
-// relanzar — lanzar/re-lanzar la transcripción async de UNA fuente (Fase 10)
+// relanzar — lanzar/re-lanzar la transcripción async de UNA fuente
 // =============================================================================
 // Factoriza el bloque que antes vivía inline en `iniciarTranscripcionMultifuente`
 // para que tengan UNA sola fuente de verdad (DRY, regla "no parches"):

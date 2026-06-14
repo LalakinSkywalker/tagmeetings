@@ -212,7 +212,7 @@ describe('LLMAnalysisEngine', () => {
       const headers = captured.init.headers as Record<string, string>
       expect(headers.Authorization).toBe('Bearer mykey')
       expect(headers['HTTP-Referer']).toBeTruthy()
-      expect(headers['X-Title']).toBe('TagTranscriptor')
+      expect(headers['X-Title']).toBe('TagMeetings')
 
       const body = JSON.parse(captured.init.body as string)
       expect(body.model).toBe('openai/gpt-5-mini')

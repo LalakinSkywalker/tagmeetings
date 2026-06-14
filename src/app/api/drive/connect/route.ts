@@ -1,5 +1,5 @@
 // =============================================================================
-// PRP-TT-V2 Fase 6C — Inicia el OAuth de Google Drive
+// Inicia el OAuth de Google Drive
 // =============================================================================
 // Redirige al usuario autenticado al consentimiento de Google. Protege con un
 // `state` aleatorio guardado en cookie httpOnly (anti-CSRF). El upload a Drive

@@ -119,7 +119,7 @@ function toDeepgramLanguage(input?: string): string {
  * punctuate + smart_format por default para devolver segmentos limpios listos
  * para mapear a TranscriptSegment.
  *
- * PRP-TT-V2 Fase 2: usamos `diarize_model=latest` (diarizador entrenado con
+ * Fase 2: usamos `diarize_model=latest` (diarizador entrenado con
  * 100k+ voces, mejor separacion de voces parecidas) en vez del flag legacy
  * `diarize=true` (que enruta al diarizador v1). Segun la doc de Deepgram,
  * especificar `diarize_model` habilita la diarizacion Y selecciona la version;

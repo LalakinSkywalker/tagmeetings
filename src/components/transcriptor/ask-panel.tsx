@@ -18,7 +18,7 @@ interface Props {
   initialHistory: AskQueryListItem[]
   indexada: boolean
   estadoTranscripcion: string
-  /** Diccionario de nombres reales de hablantes (PRP-TT-003). */
+  /** Diccionario de nombres reales de hablantes. */
   speakerNames: SpeakerNames
 }
 

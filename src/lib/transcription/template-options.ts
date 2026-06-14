@@ -1,7 +1,7 @@
 import 'server-only'
 
 // =============================================================================
-// template-options — arma los datos del selector de plantillas (PRP-TT-V2 Fase 3)
+// template-options — arma los datos del selector de plantillas
 // =============================================================================
 // Mezcla las plantillas predefinidas con las plantillas del usuario en un solo
 // set de opciones + grupos para OpcionesCaptura. Las predefinidas van PRIMERO

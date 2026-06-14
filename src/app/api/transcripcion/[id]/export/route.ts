@@ -1,5 +1,5 @@
 // =============================================================================
-// PRP-TT-V2 Fase 6 — Export de documentos (analisis / transcripcion / paquete)
+// Export de documentos (analisis / transcripcion / paquete)
 // =============================================================================
 // Genera el archivo del lado SERVIDOR y lo sirve con Content-Disposition, asi el
 // navegador (incluido iOS) siempre lo descarga con el nombre limpio. Valida
@@ -61,7 +61,7 @@ export async function GET(_req: NextRequest, ctx: { params: Promise<{ id: string
 
   const plantilla = await resolveTemplateAsync(supabase, data.template_id, user.id)
   const exportData = buildExportData(data, plantilla?.name ?? data.template_id)
-  // Marca del usuario (Fase 7): color + logo en el PDF. undefined → branding default.
+  // Marca del usuario: color + logo en el PDF. undefined → branding default.
   const branding = await resolveBrandingForPdf(supabase, user.id)
 
   try {

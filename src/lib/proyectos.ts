@@ -1,5 +1,5 @@
 // =============================================================================
-// Constantes de Proyectos (compartidas server + cliente). PRP-TT-V2 Fase 5.
+// Constantes de Proyectos (compartidas server + cliente).
 // =============================================================================
 // Vive FUERA del archivo de server actions: un archivo 'use server' solo puede
 // exportar funciones async, no constantes/objetos. El selector de color de la

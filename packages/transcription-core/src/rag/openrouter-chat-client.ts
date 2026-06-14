@@ -28,7 +28,7 @@ export interface OpenRouterChatClientConfig {
   fetchFn?: typeof fetch
   /** Pricing table. Default DEFAULT_MODEL_PRICES. */
   modelPrices?: Record<string, ModelPricing>
-  /** Headers extra. Default HTTP-Referer + X-Title de TagTranscriptor. */
+  /** Headers extra. Default HTTP-Referer + X-Title de TagMeetings. */
   extraHeaders?: Record<string, string>
 }
 

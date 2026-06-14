@@ -83,7 +83,7 @@ export default async function AjustesPage({
       </AppHeader>
 
       <main className="mx-auto max-w-2xl space-y-4 px-4 py-4">
-        {/* Resultado del OAuth de Drive (PRP-TT-V2 Fase 6C) */}
+        {/* Resultado del OAuth de Drive */}
         {driveMsg && (
           <div
             className={`rounded-2xl border px-4 py-3 text-sm ${
@@ -111,7 +111,7 @@ export default async function AjustesPage({
           </div>
         </section>
 
-        {/* Transcripción por defecto (Fase 7) */}
+        {/* Transcripción por defecto */}
         <AjustesTranscripcion
           initial={{
             idiomaDefault: settings.idiomaDefault,
@@ -122,17 +122,17 @@ export default async function AjustesPage({
           templates={templates}
         />
 
-        {/* Mi marca (Fase 7): perfil + logo + color del branding de exports */}
+        {/* Mi marca: perfil + logo + color del branding de exports */}
         <AjustesMarca
           initialFullName={profile?.full_name ?? ''}
           initialColor={settings.brandColorPrimario}
           initialLogoUrl={logoUrl}
         />
 
-        {/* Notificaciones push (Fase 9) */}
+        {/* Notificaciones push */}
         <AjustesNotificaciones />
 
-        {/* Google Drive (Fase 6C) — solo si la instalacion lo tiene configurado */}
+        {/* Google Drive — solo si la instalacion lo tiene configurado */}
         {driveConfigured && <DriveConnect connected={driveConnected} email={driveEmail} />}
 
         {/* Almacenamiento (Bloque Almacenamiento): ciclo de vida del audio */}
@@ -148,7 +148,7 @@ export default async function AjustesPage({
           driveConfigured={driveConfigured}
         />
 
-        {/* Mis plantillas (Fase 3) */}
+        {/* Mis plantillas */}
         <Link
           href="/dashboard/plantillas"
           className="tap-scale flex items-center gap-3.5 rounded-2xl border border-stone-200/80 bg-white px-4 py-3.5 shadow-sm transition hover:bg-stone-50 dark:border-stone-800 dark:bg-stone-900 dark:hover:bg-stone-800"

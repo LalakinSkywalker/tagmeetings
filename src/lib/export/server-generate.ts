@@ -1,5 +1,5 @@
 // =============================================================================
-// PRP-TT-V2 Fase 6 — Generacion de archivos en el SERVIDOR
+// Generacion de archivos en el SERVIDOR
 // =============================================================================
 // Genera el archivo de export del lado servidor y lo entrega como bytes. El
 // route handler lo sirve con Content-Disposition, asi el navegador (incluido

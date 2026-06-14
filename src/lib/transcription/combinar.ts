@@ -4,7 +4,7 @@ import type { SpeakerNames } from './speaker-names'
 // =============================================================================
 // combinar — fusiona N fuentes (audio/video/pdf/doc) en UN TranscriptionResult
 // =============================================================================
-// DECISIÓN DE DISEÑO DEL MERGE (PRP-TT-V2 Fase 4, documentada):
+// DECISIÓN DE DISEÑO DEL MERGE:
 //
 //   1. HABLANTES cross-archivo NO se intentan emparejar. Deepgram diariza por
 //      archivo de forma independiente: el "Speaker 0" del audio A NO es el

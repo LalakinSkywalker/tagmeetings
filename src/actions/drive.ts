@@ -1,7 +1,7 @@
 'use server'
 
 // =============================================================================
-// Server actions — Google Drive (PRP-TT-V2 Fase 6C)
+// Server actions — Google Drive
 // =============================================================================
 // Estado de conexion (con correo) + desconectar + archivar una sesion en Drive
 // bajo TagMeetings/{proyecto|Sesiones sueltas}/{sesion}, eligiendo QUE se
@@ -106,7 +106,7 @@ export async function archivarEnDrive(
   try {
     const plantilla = await resolveTemplateAsync(supabase, data.template_id, user.id)
     const exportData = buildExportData(data, plantilla?.name ?? data.template_id)
-    // Marca del usuario (Fase 7): color + logo en el PDF archivado a Drive.
+    // Marca del usuario: color + logo en el PDF archivado a Drive.
     const branding = await resolveBrandingForPdf(supabase, user.id)
     const archivos: string[] = []
 

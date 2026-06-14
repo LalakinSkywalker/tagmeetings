@@ -96,7 +96,7 @@ export default async function ProyectoDetallePage({ params }: PageProps) {
           </section>
         )}
 
-        {/* Memoria del histórico — resumen jerárquico (PRP-TT-V2 Fase 5B) */}
+        {/* Memoria del histórico — resumen jerárquico */}
         {proyecto.sesiones.length > 0 && (
           <section className="rounded-2xl border border-stone-200/80 bg-white p-4 shadow-sm dark:border-stone-800 dark:bg-stone-900">
             <div className="mb-3 flex items-center justify-between gap-2">
@@ -119,7 +119,7 @@ export default async function ProyectoDetallePage({ params }: PageProps) {
           </section>
         )}
 
-        {/* Tablero de pendientes vivo (PRP-TT-V2 Fase 5B-D) */}
+        {/* Tablero de pendientes vivo */}
         {proyecto.sesiones.length > 0 && (
           <section className="rounded-2xl border border-stone-200/80 bg-white p-4 shadow-sm dark:border-stone-800 dark:bg-stone-900">
             <div className="mb-3 flex items-center justify-between gap-2">
@@ -143,7 +143,7 @@ export default async function ProyectoDetallePage({ params }: PageProps) {
           </section>
         )}
 
-        {/* Pregúntale al proyecto — Ask cross-sesion (PRP-TT-V2 Fase 5B) */}
+        {/* Pregúntale al proyecto — Ask cross-sesion */}
         {proyecto.sesiones.length > 0 && (
           <section className="rounded-2xl border border-stone-200/80 bg-white p-4 shadow-sm dark:border-stone-800 dark:bg-stone-900">
             <div className="mb-3 flex items-center justify-between gap-2">

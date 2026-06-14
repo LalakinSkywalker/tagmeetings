@@ -23,7 +23,7 @@ interface Props {
   speakerIds: number[]
   /** Diccionario actual persistido. */
   initialNames: SpeakerNames
-  /** Fuentes de un analisis multi-fuente (para headers legibles). PRP-TT — Hueco B. */
+  /** Fuentes de un analisis multi-fuente (para headers legibles). — Hueco B. */
   fuentes?: FuenteInfo[]
 }
 
@@ -62,9 +62,9 @@ function shallowEqual(a: SpeakerNames, b: SpeakerNames): boolean {
  * Panel "Participantes" arriba del tab Transcripcion. Ponle nombre a los
  * hablantes detectados; al guardar persiste el diccionario via server action y
  * refresca para reflejar los nombres en la transcripcion, el analisis y el Ask.
- * Costo cero de IA (PRP-TT-003).
+ * Costo cero de IA.
  *
- * MULTI-FUENTE (PRP-TT — Hueco B): cuando la sesion combina varios audios,
+ * MULTI-FUENTE: cuando la sesion combina varios audios,
  * Deepgram numera los hablantes por archivo, asi que aparecen muchos ("F1·
  * Hablante 0", "F2·Hablante 0"...) cuando en realidad son pocas personas. El
  * panel los AGRUPA por fuente con encabezados legibles y deja ASIGNAR cada uno a

@@ -1,5 +1,5 @@
 // =============================================================================
-// PRP-TT-V2 Fase 6 — Disparadores de descarga en el navegador
+// Disparadores de descarga en el navegador
 // =============================================================================
 
 /**

@@ -1,7 +1,7 @@
 'use client'
 
 // =============================================================================
-// ProyectoMemoria — resumen jerarquico del proyecto (PRP-TT-V2 Fase 5B)
+// ProyectoMemoria — resumen jerarquico del proyecto
 // =============================================================================
 // Muestra el meta-resumen del proyecto (sintesis de los resumenes de todas sus
 // sesiones) y permite generarlo / actualizarlo. Estandar mobile-native-ui.

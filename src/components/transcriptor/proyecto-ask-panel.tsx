@@ -1,7 +1,7 @@
 'use client'
 
 // =============================================================================
-// ProyectoAskPanel — Ask cross-sesion a nivel proyecto (PRP-TT-V2 Fase 5B)
+// ProyectoAskPanel — Ask cross-sesion a nivel proyecto
 // =============================================================================
 // Pregunta sobre el HISTORICO de todas las sesiones del proyecto. Cada cita
 // recuerda de que sesion proviene y enlaza a ella. Mismo lenguaje visual que el

@@ -14,7 +14,7 @@ import 'server-only'
 // ciclo. En modo manual solo se borra si ya hay respaldo previo (archivado_en).
 //
 // ALCANCE: cubre sesiones SINGLE (audio en transcripciones.audio_path) Y las
-// MULTIFUENTE (audios reales en transcripcion_fuentes.audio_path, PRP-TT-ALM2).
+// MULTIFUENTE (audios reales en transcripcion_fuentes.audio_path).
 // El barrido single libera el audio del padre; el barrido multifuente libera cada
 // fuente de audio/video como unidad independiente (respaldo + borrado por fuente,
 // salvaguarda por fuente, flag agregado en el padre). NUNCA se borra la
@@ -60,7 +60,7 @@ export interface CicloResult {
   liberados: number
   saltados: number
   acciones: CicloAccion[]
-  // Multifuente (PRP-TT-ALM2): conteo del segundo barrido (por fuente).
+  // Multifuente: conteo del segundo barrido (por fuente).
   mfSesionesRevisadas: number
   mfFuentesLiberadas: number
   mfFuentesSaltadas: number
@@ -238,7 +238,7 @@ export async function correrCicloAlmacenamiento(supabase: SupabaseClient): Promi
 }
 
 // ---------------------------------------------------------------------------
-// Barrido multifuente (PRP-TT-ALM2): libera el audio de cada fuente de las
+// Barrido multifuente: libera el audio de cada fuente de las
 // sesiones combinadas. Espeja el barrido single con un nivel extra de iteracion
 // por fuente. Reusa las MISMAS decisiones puras (decidirAccion/planBorrado), la
 // salvaguarda dura y el CAS anti-race, ahora a nivel `transcripcion_fuentes`.

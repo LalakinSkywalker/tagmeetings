@@ -1,7 +1,7 @@
 'use server'
 
 // =============================================================================
-// Server action — Reintentar una transcripción atorada/fallida (Fase 10)
+// Server action — Reintentar una transcripción atorada/fallida
 // =============================================================================
 // El equivalente MANUAL del watchdog, para UN job, disparado por el usuario
 // desde la UI (botón "Reintentar"). A diferencia del watchdog (service-role +

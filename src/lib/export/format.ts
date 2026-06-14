@@ -1,5 +1,5 @@
 // =============================================================================
-// PRP-TT-V2 Fase 6 — Helpers de formato + builders de texto (TXT / MD / SRT)
+// Helpers de formato + builders de texto (TXT / MD / SRT)
 // =============================================================================
 // Builders puros e isomorficos. A partir de un ExportData producen el string de
 // cada formato de texto. DOCX y PDF viven en modulos aparte (usan librerias).

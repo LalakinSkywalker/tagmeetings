@@ -36,7 +36,7 @@ import { type ModoAnalisis } from '@/lib/transcription/modo-analisis'
 interface Props {
   templates: TemplateOption[]
   grupos: TemplateGrupo[]
-  /** Defaults del usuario (Fase 7): inicializan los selects; override por sesión. */
+  /** Defaults del usuario: inicializan los selects; override por sesión. */
   defaults: CapturaDefaults
 }
 

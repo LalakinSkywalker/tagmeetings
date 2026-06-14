@@ -1,7 +1,7 @@
 'use client'
 
 // =============================================================================
-// AjustesTranscripcion — defaults de transcripción del usuario (Fase 7)
+// AjustesTranscripcion — defaults de transcripción del usuario
 // =============================================================================
 // Cada select guarda al instante (optimista) en user_settings vía updateMySettings.
 // Estos defaults alimentan la captura (idioma/traducir/modo/plantilla); cada

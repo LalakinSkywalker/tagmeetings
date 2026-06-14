@@ -1,7 +1,7 @@
 import type { AnalysisTemplate } from '../types/index'
 
 // =============================================================================
-// Plantillas de analisis de TagTranscriptor.
+// Plantillas de analisis de TagMeetings.
 // =============================================================================
 // Cada plantilla compone: prompt_system + prompt_user_template + output_schema.
 // El schema es JSON Schema strict-compatible para OpenAI Structured Outputs:
@@ -12,7 +12,7 @@ import type { AnalysisTemplate } from '../types/index'
 //     schemas modernos draft 2020-12 — mantener todo inline draft-07 compatible)
 //
 // Estos prompts son production-grade pero iterables: se pueden ajustar
-// con el uso real. otro proyecto define sus propias plantillas SOAP en su repo.
+// con el uso real. Otro consumidor define sus propias plantillas en su repo.
 // =============================================================================
 
 // -----------------------------------------------------------------------------
@@ -328,7 +328,7 @@ EXTRAE OBLIGATORIAMENTE:
 }
 
 // =============================================================================
-// Plantillas GENERICAS multi-tema (PRP-TT-V2 Fase 2)
+// Plantillas GENERICAS multi-tema
 // =============================================================================
 // Las 6 plantillas anteriores son de venta/negocio (1 hilo, contraparte
 // comercial). Estas 4 cubren contenido multi-tema donde NO hay un solo dolor o
@@ -573,7 +573,7 @@ export const PLANTILLAS_TAGTRANSCRIPTOR_LIST: AnalysisTemplate[] = [
 ]
 
 /**
- * Agrupacion de plantillas para el selector (mejor guia, PRP-TT-V2 Fase 2).
+ * Agrupacion de plantillas para el selector (mejor guia).
  * Cada grupo tiene un label y los ids que contiene, en orden de presentacion.
  */
 export const PLANTILLAS_GRUPOS: Array<{ label: string; ids: string[] }> = [

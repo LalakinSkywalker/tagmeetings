@@ -1,5 +1,5 @@
 // =============================================================================
-// PRP-TT-V2 Fase 6 — Generador DOCX (Word) con branding Bluntag
+// Generador DOCX (Word) con branding Bluntag
 // =============================================================================
 // Construye objetos `Document` de la libreria `docx` (isomorfica: corre en el
 // navegador y en Node). El empaquetado a Blob/Buffer lo hace el call site

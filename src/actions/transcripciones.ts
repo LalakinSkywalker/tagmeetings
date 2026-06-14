@@ -1,14 +1,14 @@
 'use server'
 
 // =============================================================================
-// Server actions — TagTranscriptor Fase 2 + Fase 3 + Fase 7 (PRP-TT-001 + PRP-TT-002)
+// Server actions — TagMeetings
 // =============================================================================
 // Flujo end-to-end:
 //   1. UI llama createTranscripcionDraft(titulo, templateId, audioMeta)
 //      → inserta fila pendiente + signed upload URL.
 //   2. UI sube el archivo via supabase.storage.uploadToSignedUrl(...).
 //   3. UI llama iniciarTranscripcion(transcripcionId)
-//      → ASYNC (PRP-TT-002): si provider soporta callback (Deepgram), dispara
+// → ASYNC: si provider soporta callback (Deepgram), dispara
 //        fire-and-forget y devuelve estado='transcribiendo' al instante.
 //        El resto del pipeline lo completa /api/webhooks/deepgram cuando
 //        Deepgram POSTea de vuelta.
@@ -58,14 +58,14 @@ export interface CreateTranscripcionDraftInput {
   audioMime: string
   audioSizeBytes: number
   /**
-   * Idioma solicitado para la transcripcion (PRP-TT-V2 Fase 2):
+   * Idioma solicitado para la transcripcion:
    * - 'es-MX' (default) → fuerza espanol (mejor precision en audios en espanol).
    * - 'auto' → el motor detecta el idioma; si no es espanol, se traduce.
    * - codigo soportado ('en','pt','fr',...) → fuerza ese idioma + traduce a espanol.
    */
   idioma?: string
   /**
-   * Pre-registro ligero de participantes (PRP-TT-V2 Fase 2): nombres esperados
+   * Pre-registro ligero de participantes: nombres esperados
    * ingresados ANTES de grabar. NO es biometria — solo para asignar nombres
    * rapido al terminar + alerta de discrepancia. Opcional.
    */
@@ -73,13 +73,13 @@ export interface CreateTranscripcionDraftInput {
   /** Numero de hablantes esperado (para alerta de discrepancia). Opcional. */
   numSpeakersEsperados?: number
   /**
-   * Modo de analisis para esta sesion (PRP-TT-V2 Fase 5B-C, Eje 1):
+   * Modo de analisis para esta sesion:
    * 'rapido' (default) o 'profundo'. Se persiste y lo lee el pipeline del
    * primer analisis. Override por sesion del default (Fase 7 lo hara global).
    */
   modoAnalisis?: ModoAnalisis
   /**
-   * Intencion de traduccion para esta sesion (Fase 7). Override por sesion:
+   * Intencion de traduccion para esta sesion. Override por sesion:
    *   - `undefined` → usar el default del usuario (user_settings.traducir_a).
    *   - `null`      → no traducir (analizar en el idioma original).
    *   - codigo      → traducir a ese idioma (ej 'es-MX', 'en').
@@ -100,7 +100,7 @@ export interface IniciarTranscripcionResult {
   errorMessage?: string
   segmentsCount?: number
   durationMs?: number
-  /** Set cuando el analisis tambien corrio en el mismo flujo (Fase 3). */
+  /** Set cuando el analisis tambien corrio en el mismo flujo. */
   analizado?: boolean
   /**
    * 'async' = se lanzo via callback Deepgram; UI debe polear getEstadoTranscripcion.
@@ -109,7 +109,7 @@ export interface IniciarTranscripcionResult {
   modo?: 'async' | 'sync'
 }
 
-/** Estado en vivo para polling de UI (PRP-TT-002). */
+/** Estado en vivo para polling de UI. */
 export interface EstadoTranscripcionResult {
   ok: boolean
   estado:
@@ -126,7 +126,7 @@ export interface EstadoTranscripcionResult {
   /** Solo set si estado='completado'. */
   categoria?: string
   /** Última actividad (ISO). La UI lo usa para detectar "lleva demasiado tiempo
-   *  sin avanzar" y ofrecer reintento (Fase 10). */
+   * sin avanzar" y ofrecer reintento. */
   updatedAt?: string
 }
 
@@ -200,7 +200,7 @@ export interface TranscripcionesListFilters {
   /**
    * Si true, solo devuelve sesiones SUELTAS (proyecto_id IS NULL). La Biblioteca
    * lo usa para mantenerse limpia: las sesiones asignadas a un proyecto viven en
-   * ese proyecto, no en el listado general (PRP-TT — Hueco C, biblioteca limpia).
+   * ese proyecto, no en el listado general.
    */
   soloSueltas?: boolean
   /** Pagina 1-based. Default 1. */
@@ -289,7 +289,7 @@ export async function createTranscripcionDraft(
     throw new Error('No autenticado.')
   }
 
-  // ---- Defaults del usuario (Fase 7). Cada campo cae al default configurado
+  // ---- Defaults del usuario. Cada campo cae al default configurado
   //      si la sesion no trae override, asi la config REALMENTE influye.
   const settings = await resolveUserSettings(supabase, user.id)
 
@@ -392,7 +392,7 @@ export async function createTranscripcionDraft(
 }
 
 /**
- * Orquesta la transcripcion. PRP-TT-002: si el provider soporta modo async via
+ * Orquesta la transcripcion. si el provider soporta modo async via
  * callback (Deepgram), dispara fire-and-forget y devuelve inmediatamente. El
  * resto del pipeline (analisis + indexado) lo completa /api/webhooks/deepgram
  * cuando Deepgram POSTea el resultado.
@@ -539,7 +539,7 @@ export async function iniciarTranscripcion(
       punctuate: true,
     })
 
-    // Traduccion segun la intencion de la sesion (Fase 7). En modo Mock siempre
+    // Traduccion segun la intencion de la sesion. En modo Mock siempre
     // es es-MX → no-op. Best-effort, no tumba el flujo.
     const trad = await maybeTraducir(
       result,
@@ -657,19 +657,19 @@ export async function analizarTranscripcion(
     /**
      * Fuerza re-análisis aunque ya esté completado. Re-genera el `analisis`
      * inyectando los nombres reales de hablantes actuales (Idea 2) y/o con una
-     * plantilla distinta — SIN re-transcribir ni re-indexar (PRP-TT-V2 Fase 5).
+     * plantilla distinta — SIN re-transcribir ni re-indexar.
      */
     forzar?: boolean
     /** Cambiar la plantilla de análisis al re-analizar. Default: la actual. */
     nuevoTemplateId?: string
     /**
-     * Modo de análisis para ESTE re-análisis (PRP-TT-V2 Fase 5B-C, Eje 1):
+     * Modo de análisis para ESTE re-análisis:
      * 'rapido' (reasoning bajo) o 'profundo' (reasoning alto). Si se pasa, se
      * persiste como el modo de la sesión. Default: el modo persistido de la sesión.
      */
     modo?: ModoAnalisis
     /**
-     * Alcance del contexto del proyecto a inyectar (PRP-TT-V2 Fase 5B-C, Eje 2):
+     * Alcance del contexto del proyecto a inyectar:
      * 'ninguno' (default), 'memoria' (síntesis del histórico) o 'detallado'
      * (memoria + resúmenes de últimas sesiones). Solo aplica si la sesión
      * pertenece a un proyecto. Da continuidad al análisis con la relación completa.
@@ -767,7 +767,7 @@ export async function analizarTranscripcion(
       confidence: number
     }>
 
-    // Preferir la version traducida al espanol cuando existe (PRP-TT-V2 Fase 2):
+    // Preferir la version traducida al espanol cuando existe:
     // asi el resumen sale siempre en espanol aunque el audio fuera en otro idioma.
     const hayTraduccion =
       typeof transcripcion.raw_text_traducido === 'string' &&
@@ -1126,13 +1126,13 @@ export async function getTranscripcionConSegments(
 }
 
 // =============================================================================
-// FASE 5 — RAG indexing + Ask TagTranscriptor
+// FASE 5 — RAG indexing + Ask TagMeetings
 // =============================================================================
 
 /**
  * Indexa los segments de una transcripcion completa en transcripcion_chunks via
  * embeddings text-embedding-3-small. Es la condicion previa para que el tab
- * "Ask TagTranscriptor" funcione.
+ * "Ask TagMeetings" funcione.
  *
  * Idempotente: borra chunks previos y reinserta. Suma el costo del embedding
  * a cost_usd_total de la transcripcion. Estado va 'analizando'/'completado' ->
@@ -1168,7 +1168,7 @@ export async function indexarTranscripcion(
   }
 
   // Indexar la version en espanol cuando existe, para que el Ask responda en
-  // espanol (PRP-TT-V2 Fase 2). Si no, indexar el original.
+  // espanol. Si no, indexar el original.
   const segmentsAIndexar =
     Array.isArray(transcripcion.segments_traducido) &&
     transcripcion.segments_traducido.length > 0
@@ -1295,7 +1295,7 @@ export async function askTranscripcion(
     return { ok: false, errorMessage: 'Transcripcion no encontrada o sin permisos.' }
   }
 
-  // Diccionario de nombres reales (PRP-TT-003): se inyecta en runtime al prompt
+  // Diccionario de nombres reales: se inyecta en runtime al prompt
   // del RAG para que el LLM entienda preguntas por nombre. NO re-indexa nada.
   const speakerNames =
     transcripcion.speaker_names && typeof transcripcion.speaker_names === 'object'
@@ -1425,7 +1425,7 @@ export async function transcripcionEstaIndexada(
 }
 
 // =============================================================================
-// PRP-TT-003 — Edicion de speakers (nombres reales de hablantes)
+// — Edicion de speakers (nombres reales de hablantes)
 // =============================================================================
 
 export interface GuardarNombresSpeakersResult {
@@ -1462,7 +1462,7 @@ function sanitizeSpeakerName(raw: unknown): string {
  * - Sanitiza cada nombre (cap de longitud + strip control chars / saltos de linea).
  * - Las claves no numericas se descartan; un nombre vacio borra la clave (revierte
  *   ese hablante a "Speaker N").
- * - NO reprocesa audio ni re-indexa embeddings (PRP-TT-003): el diccionario se
+ * - NO reprocesa audio ni re-indexa embeddings: el diccionario se
  *   inyecta en runtime al render y al prompt del Ask.
  */
 export async function guardarNombresSpeakers(
@@ -1524,7 +1524,7 @@ export async function guardarNombresSpeakers(
 }
 
 // =============================================================================
-// Renombrar transcripcion (PRP-TT-V2 Fase 1, quick win)
+// Renombrar transcripcion
 // =============================================================================
 
 export interface RenombrarResult {
@@ -1596,9 +1596,9 @@ export async function renombrarTranscripcion(
 }
 
 // =============================================================================
-// Eliminar sesiones (PRP-TT — Hueco A: borrado 1x1 + bulk selectivo)
+// Eliminar sesiones
 // =============================================================================
-// ALCANCE DEL BORRADO (decidido con Eduardo 2026-06-02):
+// ALCANCE DEL BORRADO:
 //   - Se borra la fila `transcripciones`. La BD cascada en automatico:
 //       · transcripcion_chunks (embeddings RAG) → ON DELETE CASCADE
 //       · transcripcion_fuentes (fuentes multi-fuente)  → ON DELETE CASCADE

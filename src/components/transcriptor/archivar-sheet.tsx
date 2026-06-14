@@ -1,7 +1,7 @@
 'use client'
 
 // =============================================================================
-// PRP-TT-V2 Fase 6C — Hoja "Archivar en Drive" (transparencia + control)
+// Hoja "Archivar en Drive" (transparencia + control)
 // =============================================================================
 // Antes de archivar, el usuario VE a qué cuenta y a qué carpeta va, ELIGE qué
 // guardar (análisis / transcripción / audio) y en qué formato, y ve el nombre

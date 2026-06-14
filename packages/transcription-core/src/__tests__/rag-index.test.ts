@@ -656,7 +656,7 @@ describe('PgvectorRagIndex.ask', () => {
     )
   })
 
-  it('respeta searchRpcName + tableName custom (otro proyecto-style)', async () => {
+  it('respeta searchRpcName + tableName custom (custom-style)', async () => {
     const rpcCalls: Array<{ fn: string; args: Record<string, unknown> }> = []
     const client = makeStubSupabaseClient({ rpcRows: [], rpcCalls })
     const idx = new PgvectorRagIndex({

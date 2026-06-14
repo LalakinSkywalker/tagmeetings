@@ -1,5 +1,5 @@
 // =============================================================================
-// custom-template-builder — compilador de plantillas de usuario (PRP-TT-V2 Fase 3)
+// custom-template-builder — compilador de plantillas de usuario
 // =============================================================================
 // El asesor de IA NO emite el JSON Schema crudo (es fragil: olvida
 // additionalProperties, deja campos opcionales, mete $ref, etc., y OpenRouter

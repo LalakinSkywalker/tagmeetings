@@ -6,7 +6,7 @@
 // verdad del mapeo codigo BCP-47 -> nombre en espanol.
 // =============================================================================
 
-/** Nombre legible de un codigo de idioma BCP-47 (PRP-TT-V2 Fase 2). */
+/** Nombre legible de un codigo de idioma BCP-47. */
 export const LANG_NOMBRES: Record<string, string> = {
   es: 'Español',
   en: 'Inglés',

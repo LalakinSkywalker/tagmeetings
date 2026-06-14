@@ -1,7 +1,7 @@
 'use server'
 
 // =============================================================================
-// Server action — Editar el texto de una transcripción (Fase 10)
+// Server action — Editar el texto de una transcripción
 // =============================================================================
 // Corrige errores de transcripción (nombres propios, términos, typos) editando
 // el texto de segmentos individuales. Al guardar:

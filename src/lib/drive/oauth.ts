@@ -1,5 +1,5 @@
 // =============================================================================
-// PRP-TT-V2 Fase 6C — OAuth 2.0 de Google (Drive) — scope MINIMO drive.file
+// OAuth 2.0 de Google (Drive) — scope MINIMO drive.file
 // =============================================================================
 // Helpers puros de OAuth contra Google (fetch directo, sin la libreria pesada
 // googleapis — menos superficie/supply-chain). Scope unico: drive.file (la app

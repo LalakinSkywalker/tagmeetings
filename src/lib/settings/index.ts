@@ -1,7 +1,7 @@
 import 'server-only'
 
 // =============================================================================
-// settings — configuracion 1:1 por usuario (Fase 7)
+// settings — configuracion 1:1 por usuario
 // =============================================================================
 // Resuelve los DEFAULTS del usuario que alimentan la captura y el branding de
 // exports. Regla de oro (config siempre influye el comportamiento real): cada campo aqui DEBE influir el
@@ -32,7 +32,7 @@ export interface UserSettings {
   modoAnalisisDefault: ModoAnalisis
   /** Plantilla por defecto. `null` = primera plantilla disponible. */
   templateIdDefault: string | null
-  /** Marca para exports (Fase 6). */
+  /** Marca para exports. */
   brandLogoPath: string | null
   brandColorPrimario: string | null
   brandColorSecundario: string | null

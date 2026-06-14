@@ -99,8 +99,8 @@ describe('@bluntag/transcription-core — contrato + stubs', () => {
     })
   })
 
-  describe('Plantillas TagTranscriptor', () => {
-    it('exporta 9 plantillas con ids unicos (5 negocio + 4 genericas, PRP-TT-V2 Fase 2)', () => {
+  describe('Plantillas TagMeetings', () => {
+    it('exporta 9 plantillas con ids unicos (5 negocio + 4 genericas)', () => {
       // presencial-prospecto se fusiono en discovery (decision de producto 2026-05-30)
       expect(PLANTILLAS_TAGTRANSCRIPTOR_LIST).toHaveLength(9)
       const ids = PLANTILLAS_TAGTRANSCRIPTOR_LIST.map((p) => p.id)

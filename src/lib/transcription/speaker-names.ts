@@ -1,5 +1,5 @@
 // =============================================================================
-// PRP-TT-003 — Resolucion de nombres reales de hablantes
+// — Resolucion de nombres reales de hablantes
 // =============================================================================
 // Unica fuente de verdad del fallback "Speaker N". Se reutiliza en:
 //   - transcripcion-detalle.tsx (render de la transcripcion)
@@ -36,7 +36,7 @@ const SPEAKER_TOKEN_RE = /\{\{s(\d+)\}\}/g
 
 /**
  * Sustituye los marcadores {{sN}} de un texto por el nombre real del hablante
- * (PRP-TT-V2 Fase 5). Si el texto no trae marcadores, lo devuelve igual. Util
+ *. Si el texto no trae marcadores, lo devuelve igual. Util
  * para resumenes/bullets que el motor guardo en modo marcador.
  */
 export function resolverTokensSpeakerTexto(
@@ -51,7 +51,7 @@ export function resolverTokensSpeakerTexto(
 
 /**
  * Sustituye los marcadores {{sN}} de forma RECURSIVA sobre strings/arrays/objetos
- * (PRP-TT-V2 Fase 5). Resumen, bullets, action items y custom_fields del analisis
+ *. Resumen, bullets, action items y custom_fields del analisis
  * llevan los marcadores; esto los resuelve a nombres reales en cualquier nivel de
  * anidamiento. Si un valor no es string/array/objeto, lo devuelve igual. Renombrar
  * un hablante refleja el cambio al instante — SIN re-analizar (cero costo de IA).
@@ -90,7 +90,7 @@ export function uniqueSpeakerIds(
 }
 
 // =============================================================================
-// Multi-fuente — origen de cada hablante (PRP-TT — Hueco B)
+// Multi-fuente — origen de cada hablante
 // =============================================================================
 // DEBEN coincidir con combinar.ts (SPEAKER_NS / DOC_SPEAKER_BASE). combinar.ts
 // genera ids namespaced: nsId = orden * SPEAKER_NS + origId (audio), y los

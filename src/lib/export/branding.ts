@@ -1,7 +1,7 @@
 import 'server-only'
 
 // =============================================================================
-// branding — resuelve la marca del usuario para los PDFs (Fase 7)
+// branding — resuelve la marca del usuario para los PDFs
 // =============================================================================
 // Lee user_settings (color + logo). El logo vive en R2 (privado); aquí lo baja
 // con una signed URL y lo convierte a data URI (PNG/JPG) para pasarlo a

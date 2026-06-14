@@ -3,7 +3,7 @@
 // =============================================================================
 // Biblioteca — lista de sesiones con MODO SELECCIÓN para borrado bulk
 // =============================================================================
-// PRP-TT — Hueco A (bulk selectivo): un toggle "Seleccionar" convierte cada fila
+// — Hueco A (bulk selectivo): un toggle "Seleccionar" convierte cada fila
 // en seleccionable; una barra inferior (overlay sobre el tab bar mientras se
 // selecciona, patrón nativo) ofrece "Eliminar (N)" con confirmación obligatoria.
 // Fuera de modo selección, cada fila es un Link a su detalle (comportamiento

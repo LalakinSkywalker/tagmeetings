@@ -1,7 +1,7 @@
 'use server'
 
 // =============================================================================
-// Server actions — Multi-fuente (PRP-TT-V2 Fase 4)
+// Server actions — Multi-fuente
 // =============================================================================
 // Flujo:
 //   1. createTranscripcionMultifuenteDraft(input) → crea el padre (es_multifuente)
@@ -51,9 +51,9 @@ export interface CrearMultifuenteInput {
   idioma: string
   participantesEsperados?: string[]
   numSpeakersEsperados?: number
-  /** Modo de análisis para el análisis combinado (PRP-TT-V2 Fase 5B-C, Eje 1). */
+  /** Modo de análisis para el análisis combinado. */
   modoAnalisis?: ModoAnalisis
-  /** Intención de traducción (Fase 7): undefined=default usuario, null=no traducir, código=idioma. */
+  /** Intención de traducción: undefined=default usuario, null=no traducir, código=idioma. */
   traducirA?: string | null
   fuentes: FuenteInput[]
 }
@@ -121,7 +121,7 @@ export async function createTranscripcionMultifuenteDraft(
   } = await supabase.auth.getUser()
   if (!user) throw new Error('No autenticado.')
 
-  // Defaults del usuario (Fase 7): cada campo cae al default si no hay override.
+  // Defaults del usuario: cada campo cae al default si no hay override.
   const settings = await resolveUserSettings(supabase, user.id)
 
   const titulo = limpiarTexto(input.titulo, 120) || 'Análisis multi-fuente'
@@ -262,7 +262,7 @@ export async function iniciarTranscripcionMultifuente(
     try {
       if (tipo === 'audio' || tipo === 'video') {
         // Primer lanzamiento de la fuente. Helper compartido (DRY) con el
-        // watchdog y el reintento manual (Fase 10) — una sola fuente de verdad.
+        // watchdog y el reintento manual — una sola fuente de verdad.
         await lanzarFuenteDeepgram(supabase, { transcripcionId, fuenteId, audioPath, idioma })
       } else {
         // Documento: descargar de R2 + extraer texto server-side.

@@ -7,7 +7,7 @@
 //
 // Casos de uso legitimos:
 //   - Generar signed URLs de Storage (server actions)
-//   - Operaciones en webhooks publicos sin sesion de usuario (PRP-TT-002)
+// - Operaciones en webhooks publicos sin sesion de usuario
 //   - Inserts a tablas que tienen RLS estricto y requieren bypass server-side
 // =============================================================================
 

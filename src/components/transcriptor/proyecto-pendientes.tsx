@@ -1,7 +1,7 @@
 'use client'
 
 // =============================================================================
-// ProyectoPendientes — tablero de pendientes VIVO del proyecto (PRP-TT-V2 5B-D)
+// ProyectoPendientes — tablero de pendientes VIVO del proyecto
 // =============================================================================
 // Agrega los action_items de todas las sesiones del proyecto. La IA propone el
 // estado (pendiente/en_curso/hecho) por la linea de tiempo; el usuario confirma,

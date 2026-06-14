@@ -3,7 +3,7 @@
 // =============================================================================
 // TranscripcionEstadoPoller — UI de progreso en vivo durante el flujo async.
 // =============================================================================
-// PRP-TT-002: cuando una transcripcion esta en 'transcribiendo'/'analizando'/
+// cuando una transcripcion esta en 'transcribiendo'/'analizando'/
 // 'indexando', Deepgram esta procesando async via callback. Este componente
 // hace polling cada N segundos al server action getEstadoTranscripcion y
 // refresca la pagina cuando detecta 'completado' o 'error'.

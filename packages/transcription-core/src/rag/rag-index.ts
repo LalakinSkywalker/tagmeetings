@@ -1,10 +1,10 @@
 // =============================================================================
-// RagIndex — interface canonica + MockRagIndex + PgvectorRagIndex (Fase 5)
+// RagIndex — interface canonica + MockRagIndex + PgvectorRagIndex
 // =============================================================================
 // El paquete NO conoce el schema de tablas del consumidor. El PgvectorRagIndex
 // recibe via constructor el `supabaseClient` + nombre de tabla de chunks +
-// nombre del RPC de search. Esto permite que TagTranscriptor use
-// `transcripcion_chunks` + `search_chunks` y otro proyecto use otros sin tocar el
+// nombre del RPC de search. Esto permite que TagMeetings use
+// `transcripcion_chunks` + `search_chunks` y otro consumidor use otros sin tocar el
 // codigo del paquete.
 // =============================================================================
 
@@ -53,7 +53,7 @@ export interface RagIndex {
    *
    * @throws RagError si la transcripcion no existe indexada.
    *
-   * @param speakerNames OPCIONAL (PRP-TT-003): diccionario { "<speaker_id>": "<nombre real>" }.
+   * @param speakerNames OPCIONAL: diccionario { "<speaker_id>": "<nombre real>" }.
    *        Cuando se pasa, los nombres se inyectan en el prompt en runtime para
    *        que el LLM entienda preguntas por nombre y las citas lleven el nombre.
    *        Retrocompatible: ausente = comportamiento original (Speaker N).
@@ -66,11 +66,11 @@ export interface RagIndex {
 }
 
 /**
- * Extension de RagIndex con Ask a nivel PROYECTO (cross-sesion, PRP-TT-V2 Fase 5B).
+ * Extension de RagIndex con Ask a nivel PROYECTO (cross-sesion).
  * Responde preguntas sobre el HISTORICO de varias sesiones de un proyecto a la vez
  * ("¿que le promet a Mario en 3 meses?"). Cada cita recuerda de que sesion proviene.
  *
- * Aditiva: un consumidor que solo implemente/use `ask()` (ej. otro proyecto) NO se
+ * Aditiva: un consumidor que solo implemente/use `ask()` (ej. otro consumidor) NO se
  * afecta — esta interface es opcional y separada de RagIndex.
  */
 export interface ProjectAwareRagIndex extends RagIndex {
@@ -368,7 +368,7 @@ export interface MinimalSupabaseRagClient {
 }
 
 // =============================================================================
-// PgvectorRagIndex (Fase 5 PRP-TT-001)
+// PgvectorRagIndex
 // =============================================================================
 
 export interface PgvectorRagIndexConfig {
@@ -441,7 +441,7 @@ const ASK_RESPONSE_SCHEMA: Record<string, unknown> = {
 }
 
 /**
- * Resuelve el nombre a mostrar de un hablante (PRP-TT-003). Defensa en
+ * Resuelve el nombre a mostrar de un hablante. Defensa en
  * profundidad: aunque el caller (server action) ya sanitiza al guardar, aqui
  * re-limpiamos saltos de linea / control chars y capeamos longitud antes de que
  * el nombre llegue al prompt del LLM — un nombre NO debe poder hacerse pasar por
@@ -464,7 +464,7 @@ function speakerLabelFor(
 /**
  * Construye una linea-roster de participantes para el system prompt, solo con
  * los hablantes presentes en los chunks recuperados que tengan nombre real.
- * Vacio si no hay nombres aplicables. (PRP-TT-003)
+ * Vacio si no hay nombres aplicables.
  */
 function buildSpeakerRoster(
   chunks: SearchChunkRow[],
@@ -700,7 +700,7 @@ export class PgvectorRagIndex implements ProjectAwareRagIndex {
       }
     }
 
-    // Roster de participantes con nombres reales (PRP-TT-003): se inyecta en el
+    // Roster de participantes con nombres reales: se inyecta en el
     // system prompt para que el LLM mapee "¿que dijo Fulano?" al speaker correcto.
     const roster = buildSpeakerRoster(chunks, speakerNames)
     const systemPrompt = roster ? `${ASK_SYSTEM_PROMPT} ${roster}` : ASK_SYSTEM_PROMPT
