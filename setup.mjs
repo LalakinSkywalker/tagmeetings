@@ -136,7 +136,67 @@ VAPID_SUBJECT=${q(v.VAPID_SUBJECT)}
 `
 }
 
+/** Modo automatico (sin teclear). Para cuando un agente (Claude Code) instala por el
+ *  usuario, o cuando no hay terminal interactiva. Genera las llaves de seguridad, escribe
+ *  .env.local con ellas + huecos vacios para las llaves externas, e imprime que falta.
+ *  No hace ninguna pregunta, asi que nunca se queda colgado esperando input. */
+async function runAuto() {
+  console.log('')
+  line()
+  console.log(c('brand', c('bold', '   TagMeetings — Instalador (modo automatico)')))
+  console.log(c('dim', '   Sin preguntas: genero tus llaves de seguridad y dejo .env.local listo.'))
+  line()
+
+  const v = { ...genKeys() }
+  const vapid = await genVapid()
+  v.NEXT_PUBLIC_VAPID_PUBLIC_KEY = vapid.publicKey
+  v.VAPID_PRIVATE_KEY = vapid.privateKey
+  v.NEXT_PUBLIC_SITE_URL = 'http://localhost:3050'
+  v.OPENROUTER_MODEL = 'openai/gpt-5-mini'
+  // Externas + opcionales: vacias, para que el agente/usuario las rellene.
+  for (const k of [
+    'NEXT_PUBLIC_SUPABASE_URL', 'NEXT_PUBLIC_SUPABASE_ANON_KEY', 'SUPABASE_SERVICE_ROLE_KEY',
+    'DEEPGRAM_API_KEY', 'OPENROUTER_API_KEY', 'R2_ACCOUNT_ID', 'R2_ENDPOINT', 'R2_BUCKET',
+    'R2_ACCESS_KEY_ID', 'R2_SECRET_ACCESS_KEY', 'OPENAI_API_KEY', 'GOOGLE_CLIENT_ID',
+    'GOOGLE_CLIENT_SECRET', 'VAPID_SUBJECT',
+  ]) v[k] = ''
+
+  if (existsSync(ENV_PATH)) {
+    copyFileSync(ENV_PATH, `${ENV_PATH}.bak`)
+    console.log(c('dim', '   (Ya habia un .env.local; guarde copia en .env.local.bak)'))
+  }
+  writeFileSync(ENV_PATH, buildEnv(v), 'utf8')
+  console.log(c('green', '   ✓ Llaves de seguridad generadas (cifrado, cron, notificaciones)'))
+  console.log(c('green', '   ✓ .env.local escrito con esas llaves'))
+  console.log('')
+  console.log(c('bold', '   FALTAN 4 llaves externas. Consiguelas y pegalas en .env.local (estan vacias):'))
+  console.log('')
+  console.log(c('cyan', '   1) Supabase   →  https://supabase.com/dashboard/projects'))
+  console.log(c('dim', '      Crea un proyecto. En Project Settings → API, copia 3 valores en:'))
+  console.log(c('dim', '      NEXT_PUBLIC_SUPABASE_URL · NEXT_PUBLIC_SUPABASE_ANON_KEY · SUPABASE_SERVICE_ROLE_KEY'))
+  console.log(c('cyan', '   2) Deepgram   →  https://console.deepgram.com'))
+  console.log(c('dim', '      Crea una API Key  →  DEEPGRAM_API_KEY'))
+  console.log(c('cyan', '   3) OpenRouter →  https://openrouter.ai/keys'))
+  console.log(c('dim', '      Crea una API Key (con credito)  →  OPENROUTER_API_KEY'))
+  console.log(c('cyan', '   4) Cloudflare R2 →  https://dash.cloudflare.com  → R2'))
+  console.log(c('dim', '      Crea un bucket + API Token  →  R2_ACCOUNT_ID · R2_BUCKET · R2_ACCESS_KEY_ID · R2_SECRET_ACCESS_KEY'))
+  console.log(c('dim', '      R2_ENDPOINT puede quedar:  https://<R2_ACCOUNT_ID>.r2.cloudflarestorage.com'))
+  console.log('')
+  console.log(c('dim', '   Opcionales (puedes omitir): OPENAI_API_KEY, Google Drive, notificaciones push.'))
+  console.log('')
+  line()
+  console.log(c('bold', '   Cuando .env.local este completo:'))
+  console.log(`   ${c('bold', 'a)')} Monta la base de datos: abre el SQL Editor de tu Supabase, pega TODO`)
+  console.log(`      ${c('cyan', MIGRATION_REL)}  y pulsa Run.`)
+  console.log(`   ${c('bold', 'b)')} Arranca:  ${c('bold', 'npm run dev')}  →  ${c('cyan', 'http://localhost:3050')}`)
+  line()
+  rl.close()
+}
+
 async function main() {
+  if (process.argv.includes('--auto') || process.argv.includes('--non-interactive') || !stdin.isTTY) {
+    return runAuto()
+  }
   console.clear()
   line()
   console.log(c('brand', c('bold', '   TagMeetings — Instalador asistido')))

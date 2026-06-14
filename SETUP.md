@@ -91,17 +91,20 @@ Si activaste Google Drive, agrega también `https://tu-dominio/api/drive/callbac
 
 ```text
 Acabo de descargar el proyecto TagMeetings (self-host BYOK). Ayúdame a instalarlo
-en mi computadora, paso a paso, explicándome en palabras simples:
+en mi computadora, paso a paso, explicándome en palabras simples. Yo no quiero
+tocar la terminal ni editar archivos: hazlo tú por mí.
 
 1. Verifica que tengo Node 20+ instalado; si no, dime cómo instalarlo.
 2. Corre `npm install`.
-3. Corre `node setup.mjs` y acompáñame a llenar cada dato: explícame qué es cada
-   servicio (Supabase, Deepgram, OpenRouter, Cloudflare R2), ábreme el link de
-   cada panel y dime exactamente qué copiar. Los servicios opcionales (OpenAI,
-   Google Drive, notificaciones) los podemos omitir por ahora.
-4. Cuando el instalador me pida montar la base de datos, ábreme el editor SQL de
-   mi Supabase, dime qué archivo copiar y confirma conmigo que corrió bien.
-5. Arranca la app con `npm run dev` y dime en qué dirección abrirla.
+3. Corre `node setup.mjs --auto`: genera mis llaves de seguridad y deja el
+   archivo `.env.local` listo, con huecos vacíos para 4 servicios.
+4. Acompáñame a crear las cuentas y conseguir esas 4 llaves (Supabase, Deepgram,
+   OpenRouter, Cloudflare R2): ábreme el panel de cada una, dime qué crear y qué
+   copiar, y TÚ pega cada llave en su hueco del `.env.local` (yo no lo edito).
+   Los opcionales (OpenAI, Google Drive, notificaciones) los omitimos por ahora.
+5. Cuando el `.env.local` esté completo, ábreme el editor SQL de mi Supabase,
+   dime qué archivo copiar, pégalo y confirma conmigo que corrió bien.
+6. Arranca la app con `npm run dev` y dime en qué dirección abrirla.
 
 Si algo falla, diagnostícalo y arréglalo conmigo antes de seguir. No subas ni
 compartas mis llaves en ningún lado.
