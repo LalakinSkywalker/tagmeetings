@@ -23,6 +23,7 @@ import { revalidatePath } from 'next/cache'
 import { createClient as createUserSupabaseClient } from '@/lib/supabase/server'
 import { COLORES_PROYECTO, COLOR_PROYECTO_DEFAULT } from '@/lib/proyectos'
 import { getRagIndex, getChatClient } from '@/lib/transcription'
+import { formatFecha } from '@/lib/format/fecha'
 
 // Cap blando de proyectos por usuario (anti-abuso; Fase 8 formaliza cuotas).
 const MAX_PROYECTOS_POR_USUARIO = 200
@@ -754,11 +755,7 @@ export async function generarMemoriaProyecto(proyectoId: string): Promise<Memori
     const bullets = bulletsRaw
       .map((b) => resolverTokensSpeaker(String(b ?? ''), names))
       .filter((b) => b.length > 0)
-    const fecha = new Date(s.created_at as string).toLocaleDateString('es-MX', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    })
+    const fecha = formatFecha(s.created_at as string)
     const categoria = (s as { categoria?: string | null }).categoria ?? 'sesion'
     return [
       `[${i + 1}] ${s.titulo as string} · ${fecha} · ${categoria}`,
@@ -952,11 +949,7 @@ export async function generarTableroPendientes(
       typeof (s as { speaker_names?: unknown }).speaker_names === 'object'
         ? ((s as { speaker_names?: unknown }).speaker_names as Record<string, string>)
         : null
-    const fecha = new Date(s.created_at as string).toLocaleDateString('es-MX', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    })
+    const fecha = formatFecha(s.created_at as string)
     for (const it of items) {
       if (!it || typeof it !== 'object') continue
       const textoRaw = (it as { texto?: unknown }).texto

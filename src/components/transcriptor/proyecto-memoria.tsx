@@ -10,6 +10,7 @@
 import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import { generarMemoriaProyecto } from '@/actions/proyectos'
+import { formatFecha } from '@/lib/format/fecha'
 
 interface Props {
   proyectoId: string
@@ -17,14 +18,6 @@ interface Props {
   generadaAt: string | null
   stale: boolean
   sesionesCompletadasCount: number
-}
-
-function formatFecha(iso: string): string {
-  return new Date(iso).toLocaleDateString('es-MX', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  })
 }
 
 export function ProyectoMemoria({

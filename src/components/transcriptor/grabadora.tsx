@@ -14,6 +14,7 @@ import {
   type CapturaDefaults,
 } from './opciones-captura'
 import { type ModoAnalisis } from '@/lib/transcription/modo-analisis'
+import { formatFechaHora } from '@/lib/format/fecha'
 
 interface Props {
   templates: TemplateOption[]
@@ -76,14 +77,7 @@ function formatHMS(totalSec: number): string {
 }
 
 function defaultTitle(): string {
-  const now = new Date()
-  const fecha = now.toLocaleString('es-MX', {
-    day: '2-digit',
-    month: 'short',
-    hour: '2-digit',
-    minute: '2-digit',
-  })
-  return `Grabación ${fecha}`
+  return `Grabación ${formatFechaHora(new Date())}`
 }
 
 export function Grabadora({ templates, grupos, defaults }: Props) {

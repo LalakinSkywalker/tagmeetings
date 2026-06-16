@@ -15,6 +15,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import type { TranscripcionListItem } from '@/actions/transcripciones'
 import { borrarTranscripcionesBulk } from '@/actions/transcripciones'
+import { formatFechaHora } from '@/lib/format/fecha'
 import { EliminarDialog } from './eliminar-dialog'
 
 interface TranscripcionListProps {
@@ -52,13 +53,7 @@ function formatDuration(ms: number | null): string {
 }
 
 function formatDate(iso: string): string {
-  const d = new Date(iso)
-  return d.toLocaleString('es-MX', {
-    day: '2-digit',
-    month: 'short',
-    hour: '2-digit',
-    minute: '2-digit',
-  })
+  return formatFechaHora(iso)
 }
 
 function TagIcon() {

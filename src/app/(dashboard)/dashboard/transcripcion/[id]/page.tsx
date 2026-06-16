@@ -31,11 +31,9 @@ type Estado =
 export default async function TranscripcionDetallePage({ params }: PageProps) {
   const { id } = await params
   const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
-  if (!user) {
+  const { data: jwt } = await supabase.auth.getClaims()
+  const userId = jwt?.claims?.sub
+  if (!userId) {
     redirect('/login')
   }
 
@@ -73,7 +71,7 @@ export default async function TranscripcionDetallePage({ params }: PageProps) {
 
   // Nombre legible de la plantilla (predefinida o custom del usuario). Para
   // custom el chip mostraria "custom:<uuid>" sin esto.
-  const plantilla = await resolveTemplateAsync(supabase, data.template_id, user.id)
+  const plantilla = await resolveTemplateAsync(supabase, data.template_id, userId)
   const plantillaNombre = plantilla?.name ?? data.template_id
 
   // Proyectos del usuario para el selector de asignación.
@@ -107,7 +105,7 @@ export default async function TranscripcionDetallePage({ params }: PageProps) {
   const { data: driveConn } = await supabase
     .from('drive_connections')
     .select('user_id, connected_email')
-    .eq('user_id', user.id)
+    .eq('user_id', userId)
     .maybeSingle()
   const driveConnected = Boolean(driveConn)
   const driveEmail = (driveConn?.connected_email as string | null) ?? null

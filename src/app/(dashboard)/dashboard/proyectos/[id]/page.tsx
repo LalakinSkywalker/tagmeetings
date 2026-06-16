@@ -1,7 +1,7 @@
-import { notFound, redirect } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { createClient } from '@/lib/supabase/server'
 import { obtenerProyectoDetalle, listarAskProyecto } from '@/actions/proyectos'
+import { requireUserId } from '@/lib/supabase/auth'
 import { ProyectoAcciones } from '@/components/transcriptor/proyecto-acciones'
 import { ProyectoAskPanel } from '@/components/transcriptor/proyecto-ask-panel'
 import { ProyectoMemoria } from '@/components/transcriptor/proyecto-memoria'
@@ -9,6 +9,7 @@ import { ProyectoPendientes } from '@/components/transcriptor/proyecto-pendiente
 import { AppHeader } from '@/components/shell/app-header'
 import { ThemeToggle } from '@/components/theme/theme-toggle'
 import { InfoTooltip } from '@/components/ui/info-tooltip'
+import { formatFechaHora } from '@/lib/format/fecha'
 
 export const dynamic = 'force-dynamic'
 
@@ -26,12 +27,7 @@ const ESTADO_DOT: Record<string, string> = {
 }
 
 function formatDate(iso: string): string {
-  return new Date(iso).toLocaleString('es-MX', {
-    day: '2-digit',
-    month: 'short',
-    hour: '2-digit',
-    minute: '2-digit',
-  })
+  return formatFechaHora(iso)
 }
 
 function formatDuration(ms: number | null): string {
@@ -44,17 +40,17 @@ function formatDuration(ms: number | null): string {
 
 export default async function ProyectoDetallePage({ params }: PageProps) {
   const { id } = await params
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-  if (!user) redirect('/login')
+  await requireUserId()
 
-  const proyecto = await obtenerProyectoDetalle(id)
+  // Validación de sesión local (getClaims, sin red) + las dos lecturas en
+  // PARALELO en vez de en cascada. Antes: auth → detalle → ask (3 esperas en
+  // fila). El histórico Ask solo se muestra si hay sesiones (condicional abajo),
+  // así que pedirlo en paralelo no cambia lo que se ve.
+  const [proyecto, askHistory] = await Promise.all([
+    obtenerProyectoDetalle(id),
+    listarAskProyecto(id),
+  ])
   if (!proyecto) notFound()
-
-  // Memoria del proyecto (Ask cross-sesion): solo tiene sentido con >=1 sesion.
-  const askHistory = proyecto.sesiones.length > 0 ? await listarAskProyecto(id) : []
 
   return (
     <>

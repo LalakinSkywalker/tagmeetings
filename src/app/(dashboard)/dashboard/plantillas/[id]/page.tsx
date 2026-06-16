@@ -1,6 +1,6 @@
-import { notFound, redirect } from 'next/navigation'
-import { createClient } from '@/lib/supabase/server'
+import { notFound } from 'next/navigation'
 import { obtenerPlantillaSpec } from '@/actions/plantillas'
+import { requireUserId } from '@/lib/supabase/auth'
 import { PlantillaEditor } from '@/components/transcriptor/plantilla-editor'
 import { AppHeader } from '@/components/shell/app-header'
 import { ThemeToggle } from '@/components/theme/theme-toggle'
@@ -14,11 +14,7 @@ interface PageProps {
 
 export default async function EditarPlantillaPage({ params }: PageProps) {
   const { id } = await params
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-  if (!user) redirect('/login')
+  await requireUserId()
 
   const res = await obtenerPlantillaSpec(id)
   if (!res.ok || !res.spec) notFound()

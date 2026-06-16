@@ -14,16 +14,14 @@ export const maxDuration = 300
 
 export default async function CapturarPage() {
   const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
-  if (!user) {
+  const { data: jwt } = await supabase.auth.getClaims()
+  const userId = jwt?.claims?.sub
+  if (!userId) {
     redirect('/login')
   }
 
   const { templates, grupos } = await buildTemplateSelectorData()
-  const settings = await resolveUserSettings(supabase, user.id)
+  const settings = await resolveUserSettings(supabase, userId)
   const defaults = {
     idioma: settings.idiomaDefault,
     traducirA: settings.traducirA,

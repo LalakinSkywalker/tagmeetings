@@ -1,6 +1,5 @@
-import { redirect } from 'next/navigation'
-import { createClient } from '@/lib/supabase/server'
 import { listarProyectos } from '@/actions/proyectos'
+import { requireUserId } from '@/lib/supabase/auth'
 import { ProyectoCard } from '@/components/transcriptor/proyecto-card'
 import { CrearProyecto } from '@/components/transcriptor/crear-proyecto'
 import { ThemeToggle } from '@/components/theme/theme-toggle'
@@ -10,11 +9,7 @@ import { InfoTooltip } from '@/components/ui/info-tooltip'
 export const dynamic = 'force-dynamic'
 
 export default async function ProyectosPage() {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-  if (!user) redirect('/login')
+  await requireUserId()
 
   const proyectos = await listarProyectos()
 

@@ -1,9 +1,8 @@
-import { redirect } from 'next/navigation'
-import { createClient } from '@/lib/supabase/server'
 import {
   getCategoriasDelUser,
   listTranscripcionesDelUser,
 } from '@/actions/transcripciones'
+import { requireUserId } from '@/lib/supabase/auth'
 import { buildTemplateSelectorData } from '@/lib/transcription/template-options'
 import { TranscripcionList } from '@/components/transcriptor/transcripcion-list'
 import { ThemeToggle } from '@/components/theme/theme-toggle'
@@ -37,14 +36,7 @@ function pickString(val: string | string[] | undefined): string | undefined {
 }
 
 export default async function DashboardPage({ searchParams }: PageProps) {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
-  if (!user) {
-    redirect('/login')
-  }
+  await requireUserId()
 
   const params = await searchParams
   const q = pickString(params.q) ?? ''

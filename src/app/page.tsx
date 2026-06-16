@@ -7,8 +7,8 @@ import { createClient } from '@/lib/supabase/server'
 // van directo al dashboard, no autenticados al login.
 export default async function RootPage() {
   const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-  redirect(user ? '/dashboard/capturar' : '/login')
+  // getClaims valida el JWT localmente (sin round-trip) — basta para decidir
+  // el redirect. El proxy ya refrescó la sesión antes de llegar aquí.
+  const { data: jwt } = await supabase.auth.getClaims()
+  redirect(jwt?.claims?.sub ? '/dashboard/capturar' : '/login')
 }

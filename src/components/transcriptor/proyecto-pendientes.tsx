@@ -23,6 +23,7 @@ import {
 } from '@/actions/proyectos'
 import { SelectMenu, type SelectOption } from '@/components/ui/select-menu'
 import { InfoTooltip } from '@/components/ui/info-tooltip'
+import { formatFecha } from '@/lib/format/fecha'
 
 interface Props {
   proyectoId: string
@@ -51,13 +52,6 @@ const ESTADO_OPTIONS: SelectOption[] = [
   { value: 'hecho', label: ESTADO_LABEL.hecho },
 ]
 
-function formatFecha(iso: string): string {
-  return new Date(iso).toLocaleDateString('es-MX', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  })
-}
 
 function esEstado(v: string): v is EstadoPendiente {
   return v === 'pendiente' || v === 'en_curso' || v === 'hecho'

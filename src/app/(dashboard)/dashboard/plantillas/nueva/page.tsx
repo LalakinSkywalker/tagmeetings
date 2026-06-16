@@ -1,6 +1,5 @@
-import { redirect } from 'next/navigation'
-import { createClient } from '@/lib/supabase/server'
 import { PlantillaEditor } from '@/components/transcriptor/plantilla-editor'
+import { requireUserId } from '@/lib/supabase/auth'
 import { AppHeader } from '@/components/shell/app-header'
 import { ThemeToggle } from '@/components/theme/theme-toggle'
 
@@ -10,11 +9,7 @@ export const dynamic = 'force-dynamic'
 export const maxDuration = 120
 
 export default async function NuevaPlantillaPage() {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-  if (!user) redirect('/login')
+  await requireUserId()
 
   return (
     <>

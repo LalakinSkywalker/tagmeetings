@@ -1,7 +1,6 @@
-import { redirect } from 'next/navigation'
 import Link from 'next/link'
-import { createClient } from '@/lib/supabase/server'
 import { listarPlantillasUsuario } from '@/actions/plantillas'
+import { requireUserId } from '@/lib/supabase/auth'
 import { PlantillaCard } from '@/components/transcriptor/plantilla-card'
 import { AppHeader } from '@/components/shell/app-header'
 import { ThemeToggle } from '@/components/theme/theme-toggle'
@@ -9,11 +8,7 @@ import { ThemeToggle } from '@/components/theme/theme-toggle'
 export const dynamic = 'force-dynamic'
 
 export default async function PlantillasPage() {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-  if (!user) redirect('/login')
+  await requireUserId()
 
   const plantillas = await listarPlantillasUsuario()
 

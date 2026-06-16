@@ -30,24 +30,23 @@ export default async function AjustesPage({
   searchParams: Promise<{ drive?: string }>
 }) {
   const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
-  if (!user) {
+  const { data: jwt } = await supabase.auth.getClaims()
+  const userId = jwt?.claims?.sub
+  if (!userId) {
     redirect('/login')
   }
+  const userEmail = jwt?.claims?.email ?? null
 
   const { data: profile } = await supabase
     .from('profiles')
     .select('id, email, full_name, avatar_url')
-    .eq('id', user.id)
+    .eq('id', userId)
     .single()
 
   const { data: driveConn } = await supabase
     .from('drive_connections')
     .select('user_id, connected_email')
-    .eq('user_id', user.id)
+    .eq('user_id', userId)
     .maybeSingle()
   const driveConnected = Boolean(driveConn)
   const driveEmail = (driveConn?.connected_email as string | null) ?? null
@@ -56,7 +55,7 @@ export default async function AjustesPage({
   const driveConfigured = isDriveConfigured()
   const driveMsg = DRIVE_MSG[(await searchParams).drive ?? '']
 
-  const settings = await resolveUserSettings(supabase, user.id)
+  const settings = await resolveUserSettings(supabase, userId)
   const { templates } = await buildTemplateSelectorData()
   const storageUsage = await getStorageUsage()
 
@@ -73,7 +72,7 @@ export default async function AjustesPage({
     }
   }
 
-  const nombre = profile?.full_name ?? user.email ?? 'Usuario'
+  const nombre = profile?.full_name ?? userEmail ?? 'Usuario'
   const inicial = nombre.charAt(0).toUpperCase()
 
   return (
@@ -106,7 +105,7 @@ export default async function AjustesPage({
               {profile?.full_name ?? 'Mi cuenta'}
             </p>
             <p className="truncate text-xs text-stone-500 dark:text-stone-400">
-              {user.email}
+              {userEmail}
             </p>
           </div>
         </section>

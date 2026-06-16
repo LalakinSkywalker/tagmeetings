@@ -24,6 +24,7 @@ import 'server-only'
 
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { resolverTokensSpeakerTexto, type SpeakerNames } from './speaker-names'
+import { formatFecha } from '@/lib/format/fecha'
 
 export type ContextoProyectoScope = 'ninguno' | 'memoria' | 'detallado'
 
@@ -122,11 +123,7 @@ export async function construirContextoProyecto(
         .trim()
         .slice(0, MAX_CHARS_RESUMEN)
       if (resumen.length === 0) continue
-      const fecha = new Date(s.created_at as string).toLocaleDateString('es-MX', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-      })
+      const fecha = formatFecha(s.created_at as string)
       bloques.push(`- ${s.titulo as string} (${fecha}): ${resumen}`)
       sesionesIncluidas += 1
     }
