@@ -16,6 +16,7 @@ import { useRouter } from 'next/navigation'
 import type { TranscripcionListItem } from '@/actions/transcripciones'
 import { borrarTranscripcionesBulk } from '@/actions/transcripciones'
 import { formatFechaHora } from '@/lib/format/fecha'
+import { formatCategoria } from '@/lib/export/format'
 import { EliminarDialog } from './eliminar-dialog'
 
 interface TranscripcionListProps {
@@ -145,7 +146,7 @@ function FilaContenido({
           {item.titulo}
         </p>
         <p className="mt-0.5 truncate text-xs text-stone-500 dark:text-stone-400">
-          {(item.categoria ?? item.template_id)} · {formatDate(item.created_at)} · {formatDuration(item.duracion_ms)}
+          {formatCategoria(item.categoria ?? item.template_id)} · {formatDate(item.created_at)} · {formatDuration(item.duracion_ms)}
         </p>
         <div className="mt-1.5 flex items-center gap-1.5">
           <span className={`size-1.5 shrink-0 rounded-full ${dot}`} aria-hidden="true" />

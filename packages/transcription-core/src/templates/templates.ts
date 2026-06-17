@@ -143,7 +143,7 @@ EXTRAE OBLIGATORIAMENTE:
 
 export const PLANTILLA_SEGUIMIENTO: AnalysisTemplate = {
   id: 'seguimiento',
-  name: 'Reunion de seguimiento',
+  name: 'Reunión de seguimiento',
   description:
     'Update con cliente o prospecto recurrente. Captura avances desde la reunion anterior, decisiones pendientes y riesgos.',
   prompt_system: `${BASE_SYSTEM_PROMPT_PROLOGO}
@@ -191,7 +191,7 @@ EXTRAE OBLIGATORIAMENTE:
 
 export const PLANTILLA_INTERNA: AnalysisTemplate = {
   id: 'interna-brainstorm',
-  name: 'Reunion interna / brainstorm',
+  name: 'Reunión interna / lluvia de ideas',
   description:
     'Sesion propia o con socio. Captura ideas nuevas, decisiones tomadas, y bloqueos identificados.',
   prompt_system: `${BASE_SYSTEM_PROMPT_PROLOGO}

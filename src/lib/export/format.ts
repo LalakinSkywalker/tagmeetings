@@ -72,9 +72,100 @@ export function formatFechaLegible(iso: string | null): string | null {
   }
 }
 
-/** Capitaliza una clave snake_case del analisis ("siguiente_paso" -> "Siguiente Paso"). */
+/**
+ * Etiquetas legibles en español (con tildes y ñ) de los campos personalizados
+ * que devuelven las plantillas de analisis. Las llaves son las que el modelo
+ * regresa en `custom_fields`; aqui se traducen/acentuan para mostrarlas al
+ * usuario. Las llaves que no esten en el diccionario caen al fallback.
+ */
+const CUSTOM_FIELD_LABELS: Record<string, string> = {
+  // Discovery con prospecto
+  pain_points: 'Puntos de dolor',
+  budget_signals: 'Señales de presupuesto',
+  alternatives_evaluated: 'Alternativas evaluadas',
+  buy_signals: 'Señales de compra',
+  compromisos_explicitos: 'Compromisos explícitos',
+  temas_personales_relevantes: 'Temas personales relevantes',
+  nivel_interes: 'Nivel de interés',
+  proximo_paso: 'Próximo paso',
+  // Reunión de seguimiento
+  avances: 'Avances',
+  decisiones_pendientes: 'Decisiones pendientes',
+  riesgos: 'Riesgos',
+  proximo_milestone: 'Próximo hito',
+  // Reunión interna / lluvia de ideas
+  ideas_nuevas: 'Ideas nuevas',
+  decisiones_tomadas: 'Decisiones tomadas',
+  bloqueos: 'Bloqueos',
+  hipotesis_a_validar: 'Hipótesis a validar',
+  // Llamada con proveedor
+  precios: 'Precios',
+  plazos: 'Plazos',
+  terminos_comerciales: 'Términos comerciales',
+  pros_proveedor: 'Pros del proveedor',
+  contras_detectados: 'Contras detectados',
+  // Idea suelta
+  idea_central: 'Idea central',
+  accionables: 'Accionables',
+  conecta_con: 'Conecta con',
+  // Reunión general (varios temas)
+  temas_tratados: 'Temas tratados',
+  decisiones: 'Decisiones',
+  pendientes_por_tema: 'Pendientes por tema',
+  participantes_mencionados: 'Participantes mencionados',
+  // Clase / conferencia
+  tema_principal: 'Tema principal',
+  conceptos_clave: 'Conceptos clave',
+  ejemplos_o_casos: 'Ejemplos o casos',
+  tareas_o_recursos: 'Tareas o recursos',
+  preguntas_y_respuestas: 'Preguntas y respuestas',
+  // Entrevista
+  perfil_entrevistado: 'Perfil del entrevistado',
+  preguntas_clave: 'Preguntas clave',
+  respuestas_destacadas: 'Respuestas destacadas',
+  citas_textuales: 'Citas textuales',
+  conclusiones: 'Conclusiones',
+  // Noticiero / podcast
+  temas_cubiertos: 'Temas cubiertos',
+  datos_y_cifras: 'Datos y cifras',
+  fuentes_citadas: 'Fuentes citadas',
+  opiniones_o_conclusiones: 'Opiniones o conclusiones',
+}
+
+/**
+ * Etiqueta legible de una clave de campo personalizado. Usa el diccionario en
+ * español si la conoce; si no (p. ej. campos de plantillas creadas por el
+ * usuario), formatea la snake_case a frase con mayuscula inicial.
+ */
 export function formatCustomFieldKey(key: string): string {
-  return key.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
+  const conocido = CUSTOM_FIELD_LABELS[key]
+  if (conocido) return conocido
+  const texto = key.replace(/_/g, ' ').trim()
+  return texto.charAt(0).toUpperCase() + texto.slice(1)
+}
+
+/** Etiqueta legible (en español) de cada categoria de analisis. */
+const CATEGORIA_LABELS: Record<string, string> = {
+  discovery: 'Discovery',
+  seguimiento: 'Seguimiento',
+  'interna-brainstorm': 'Reunión interna',
+  proveedor: 'Proveedor',
+  'idea-suelta': 'Idea suelta',
+  'reunion-general': 'Reunión general',
+  'clase-conferencia': 'Clase / conferencia',
+  entrevista: 'Entrevista',
+  'medios-noticiero': 'Noticiero / podcast',
+}
+
+/**
+ * Etiqueta legible de la categoria de un analisis. Usa el diccionario si la
+ * conoce; si no, formatea el slug ("reunion-general" -> "Reunión general").
+ */
+export function formatCategoria(categoria: string): string {
+  const conocida = CATEGORIA_LABELS[categoria]
+  if (conocida) return conocida
+  const texto = categoria.replace(/[-_]/g, ' ').trim()
+  return texto.charAt(0).toUpperCase() + texto.slice(1)
 }
 
 // -----------------------------------------------------------------------------

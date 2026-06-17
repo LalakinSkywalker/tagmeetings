@@ -29,6 +29,7 @@ import {
 } from '@/lib/transcription/modo-analisis'
 import type { ContextoProyectoScope } from '@/lib/transcription/contexto-proyecto'
 import { nombreIdioma } from '@/lib/transcription/idioma-display'
+import { formatCustomFieldKey, formatCategoria } from '@/lib/export/format'
 
 interface Segment {
   speaker: { id: number; label?: string }
@@ -168,10 +169,6 @@ function formatCost(cost: number | null): string {
   if (!Number.isFinite(n) || n === 0) return '$0.00'
   if (n < 0.01) return `$${n.toFixed(4)}`
   return `$${n.toFixed(2)}`
-}
-
-function formatCustomFieldKey(key: string): string {
-  return key.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
 }
 
 function isStringArray(val: unknown): val is string[] {
@@ -682,7 +679,7 @@ export function TranscripcionDetalle({ transcripcion, asksHistory, indexada, pla
                 </p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   <MetaChip label="Modelo" value={analisis.model_used} />
-                  <MetaChip label="Categoría" value={analisis.categoria} />
+                  <MetaChip label="Categoría" value={formatCategoria(analisis.categoria)} />
                   <MetaChip label="Costo" value={formatCost(analisis.cost_usd)} />
                 </div>
               </Card>
@@ -701,7 +698,7 @@ export function TranscripcionDetalle({ transcripcion, asksHistory, indexada, pla
               )}
 
               {(analisis.action_items?.length ?? 0) > 0 && (
-                <Card title="Action items">
+                <Card title="Acuerdos">
                   <ul className="space-y-2 text-sm">
                     {(analisis.action_items ?? []).map((ai, i) => (
                       <li

@@ -3,6 +3,7 @@
 import { useState, useTransition, useEffect, type FormEvent } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { SelectMenu } from '@/components/ui/select-menu'
+import { formatCategoria } from '@/lib/export/format'
 
 interface TemplateOption {
   id: string
@@ -190,7 +191,7 @@ export function DashboardFilters({ categorias, templates, hideSearch = false }: 
               setCat(v)
               applyFilters({ cat: v })
             }}
-            options={[{ value: '', label: 'Todas' }, ...categorias.map((c) => ({ value: c, label: c }))]}
+            options={[{ value: '', label: 'Todas' }, ...categorias.map((c) => ({ value: c, label: formatCategoria(c) }))]}
             size="sm"
             ariaLabel="Categoría"
           />

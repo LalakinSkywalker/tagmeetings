@@ -10,6 +10,7 @@ import { AppHeader } from '@/components/shell/app-header'
 import { ThemeToggle } from '@/components/theme/theme-toggle'
 import { InfoTooltip } from '@/components/ui/info-tooltip'
 import { formatFechaHora } from '@/lib/format/fecha'
+import { formatCategoria } from '@/lib/export/format'
 
 export const dynamic = 'force-dynamic'
 
@@ -192,7 +193,7 @@ export default async function ProyectoDetallePage({ params }: PageProps) {
                           {s.titulo}
                         </p>
                         <p className="mt-0.5 truncate text-xs text-stone-500 dark:text-stone-400">
-                          {(s.categoria ?? s.template_id)} · {formatDate(s.created_at)} · {formatDuration(s.duracion_ms)}
+                          {formatCategoria(s.categoria ?? s.template_id)} · {formatDate(s.created_at)} · {formatDuration(s.duracion_ms)}
                         </p>
                         <div className="mt-1.5 flex items-center gap-1.5">
                           <span className={`size-1.5 shrink-0 rounded-full ${dot}`} aria-hidden="true" />
